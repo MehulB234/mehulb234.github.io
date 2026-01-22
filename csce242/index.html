@@ -1,14 +1,75 @@
 <!DOCTYPE html>
 <html>
-    <head> 
-        <title> CSCE 242: Mehul Bellukutty </title>
-    </head>
-    <body>
-        <h1> CSCE 242: Mehul Bellukutty </h1>
-        <p> This is Mehul Bellukuty's homepage for his assignments in Web Applications. </p>
-        <h2> Assignments </h2>
+<head>
+    <title>CSCE 242: Mehul Bellukutty</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #3a3a38;
+            color: #222222;
+        }
+
+        #container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #d7b74e;
+            border-radius: 6px;
+        }
+
+        #course-title {
+            color: darkred;
+        }
+
+        #student-name {
+            color: #444444;
+        }
+
+        #github-link {
+            display: block;
+            margin: 12px 0;
+            color: darkblue;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .assignment-link {
+            color: darkgreen;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1 id="course-title">CSCE 242</h1>
+
+        <p>
+            This is Mehul Bellukutty's homepage for his assignments in Web Applications.
+        </p>
+
+        <h2 id="student-name">Mehul Bellukutty</h2>
+
+        <a id="github-link" href="https://github.com/MehulB234/mehulb234.github.io/tree/main/csce242">
+            GitHub Repository
+        </a>
+
+        <h3>Assignments</h3>
+
         <ul>
-            <li> <a href="assignments/01-basic-html/index.html"> Basic HTML </a> </li>
+            <li>
+                <a class="assignment-link" href="assignments/01-basic-html/index.html">
+                    Assignment 1 – Basic HTML
+                </a>
+            </li>
+            <li>
+                <a class="assignment-link" href="assignments/02-basic-css/index.html">
+                    Assignment 2 – Basic CSS
+                </a>
+            </li>
         </ul>
-    </body>
+    </div>
+</body>
 </html>
