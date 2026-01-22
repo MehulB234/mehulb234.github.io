@@ -44,6 +44,8 @@ body {
     background:#ffc8dd;
     padding:5px;
     border-bottom:1px solid #cdb4db;;
+
+    flex:1;
 }
 
 #main-nav a{
