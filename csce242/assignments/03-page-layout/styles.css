@@ -1,0 +1,200 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f2df;
+    color: #4f7880;
+    margin: 0;
+}
+
+/* Main container */
+#main-content{
+    width: 90%;
+    margin: auto;
+    max-width: 1200px;
+    background: #f4f2df;
+}
+
+/* Header */
+#main-header{
+    background: #f2efd6;
+    border: 1px solid #d9d6be;
+}
+
+#main-header h1{
+    text-align: center;
+    padding: 16px 10px;
+    margin: 0;
+    color: #5c848b;
+    font-size: 2.2rem;
+}
+
+/* Navigation */
+#main-nav{
+    background: #d98586;
+    border-left: 1px solid #d9d6be;
+    border-right: 1px solid #d9d6be;
+}
+
+#main-nav ul{
+    padding-left: 0;
+    margin: 0;
+}
+
+#main-nav li{
+    list-style-type: none;
+    padding: 10px 0;
+    text-align: center;
+    border-top: 1px solid #e5dad4;
+}
+
+#main-nav li:first-child{
+    border-top: none;
+}
+
+#main-nav a{
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Content */
+#content{
+    background: #f4f2df;
+}
+
+/* Intro section */
+#intro{
+    padding: 12px 0;
+}
+
+.intro-text{
+    padding: 10px;
+    flex: 1;
+}
+
+.intro-text h2{
+    margin: 0;
+    color: #5c848b;
+    font-size: 1.3rem;
+}
+
+/* Card grid */
+.card-grid{
+    gap: 12px;
+    flex: 2.2;
+    padding: 0 10px 10px;
+}
+
+.card{
+    background: #f4f2df;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+    border: 1px solid #d9d6be;
+}
+
+.card-title{
+    background: #5c848b;
+    color: #fff;
+    padding: 6px 0;
+    font-weight: 600;
+}
+
+.card img{
+    width: 100%;
+    display: block;
+}
+
+.idea{
+    margin: 10px 0;
+    background: #5f858a;
+    color: #ffffff;
+    padding: 12px;
+    align-items: stretch;
+}
+
+.idea img{
+    background: #a8c1bc;
+    padding: 20px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.idea-text{
+    flex: 5;
+    padding: 12px 14px;
+}
+
+.idea-text h3{
+    margin: 0 0 6px;
+    font-size: 1.1rem;
+}
+
+.idea-text p{
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.idea.reverse{
+    background: #a8c1bc;
+    color: #2f4e4f;
+}
+
+.idea.reverse img{
+    background: #5f858a;
+}
+
+/* Footer */
+#main-footer{
+    background: #d98586;
+    color: #fff;
+    text-align: center;
+    padding: 16px 0;
+    margin-top: 10px;
+}
+
+#main-footer p{
+    margin: 0;
+}
+
+/* Layout */
+@media (min-width: 768px){
+
+    .columns{
+        display: flex;
+    }
+
+    /* Horizontal nav */
+    #main-nav ul{
+        display: flex;
+    }
+
+    #main-nav li{
+        flex: 1;
+        border-top: none;
+        border-right: 1px solid #e5dad4;
+    }
+
+    #main-nav li:last-child{
+        border-right: none;
+    }
+
+    #main-nav a:hover{
+        opacity: 0.85;
+    }
+
+    /* Cards */
+    .card-grid{
+        display: flex;
+    }
+
+    /* Idea rows */
+    .idea{
+        display: flex;
+        align-items: center;
+    }
+
+    .idea.reverse{
+        flex-direction: row-reverse;
+    }
+}
