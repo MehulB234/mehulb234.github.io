@@ -1,44 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>CSCE 242: Mehul Bellukutty</title>
-    <link rel="stylesheet" href="styles.css">
+  <title>CSCE 242</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div id="container">
-        <h1 id="course-title">CSCE 242</h1>
+  <div id="container">
 
-        <p>
-            This is Mehul Bellukutty's homepage for his assignments in Web Applications.
-        </p>
+    <header class="page-header">
+      <h1 id="course-title">CSCE 242</h1>
+      <p class="course-desc">
+        This course covers HTML and CSS fundamentals for building web applications.
+      </p>
 
+      <a id="github-link"
+         href="https://github.com/MehulB234/mehulb234.github.io/tree/main/csce242"
+         target="_blank" rel="noopener">
+        GitHub Repository
+      </a>
+    </header>
+
+    <main>
+      <section class="author">
         <h2 id="student-name">Mehul Bellukutty</h2>
+      </section>
 
-        <a id="github-link" href="https://github.com/MehulB234/mehulb234.github.io/tree/main/csce242">
-            GitHub Repository
-        </a>
-
+      <!-- Assignments Section -->
+      <section id="assignments" class="cards-section">
         <h3>Assignments</h3>
 
-        <ul>
-            <li>
-                <a class="assignment-link" href="assignments/01-basic-html/index.html">
-                    Assignment 1 – Basic HTML
-                </a>
-            </li>
+        <div id="assignments-list" class="cards">
+          <article class="card">
+            <h4 class="card-title">
+              <a class="assignment-link" href="assignments/01-basic-html/index.html">
+                Assignment 1 – Basic HTML
+              </a>
+            </h4>
+            <img class="card-img" src="images/Assignment1.png" alt="Assignment 1 screenshot">
+            <p class="card-desc">
+              Created a correct HTML page that used proper structure,
+              correct headings, lists, and links. 
+            </p>
+          </article>
 
-            <li>
-                <a class="assignment-link" href="assignments/02-basic-css/index.html">
-                    Assignment 2 – Basic CSS
-                </a>
-            </li>
-            <li>
-                <a class="assignment-link" href="assignments/03-page-layout/index.html">
-                    Assignment 3 – Page Layout
-                </a>
-            </li>
-        </ul>
-    </div>
+          <article class="card">
+            <h4 class="card-title">
+              <a class="assignment-link" href="assignments/02-basic-css/index.html">
+                Assignment 2 – Basic CSS
+              </a>
+            </h4>
+            <img class="card-img" src="images/Assignment2.png" alt="Assignment 2 screenshot">
+            <p class="card-desc">
+              Applied CSS styling to fix layout, colors, fonts, and spacing which
+              improved the visual design and readability of the page.
+            </p>
+          </article>
+
+          <article class="card">
+            <h4 class="card-title">
+              <a class="assignment-link" href="assignments/03-page-layout/index.html">
+                Assignment 3 – Page Layout
+              </a>
+            </h4>
+            <img class="card-img" src="images/Assignment3.png" alt="Assignment 3 screenshot">
+            <p class="card-desc">
+              Designed a multi column page layout using flexbox to manage alignment,
+              spacing, and responsiveness across different screen sizes.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="cards-section">
+        <h3>Projects</h3>
+
+        <div id="projects-list" class="cards">
+          <article class="card">
+            <h4 class="card-title">
+              <a class="project-link" href="project/part1/Mehul Bellukutty Project Part 1_ Topic Selection-2.pdf">
+                Project Topic PDF
+              </a>
+            </h4>
+            <img class="card-img" src="images/ProjectTopic.png" alt="Project topic screenshot">
+            <p class="card-desc">
+              This document describes my selected project topic, project goals,
+              and planned features for the final website.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <p>© Mehul Bellukutty — CSCE 242</p>
+    </footer>
+
+  </div>
 </body>
 </html>
