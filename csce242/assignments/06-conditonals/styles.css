@@ -1,0 +1,207 @@
+* { box-sizing: border-box; }
+
+:root{
+  --bg:#f6f7f4;
+  --card:#ffffff;
+  --accent:#3f7170;
+  --accent-2:#c86f6f;
+  --muted:#6e7a78;
+  --card-border:#d7e1dc;
+  --shadow: 0 8px 18px rgba(0,0,0,0.06);
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Page */
+body{
+  background: var(--bg);
+  margin: 0;
+  padding: 36px 20px;
+  color:#213536;
+}
+.page-wrapper{
+  max-width:980px;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
+
+/* Header */
+.card-header{
+  background: #eef3ef;
+  border-radius:6px;
+  text-align:center;
+  padding: 42px 20px 18px;
+  position: relative;
+  border:1px solid var(--card-border);
+}
+.title{
+  margin:0;
+  color:var(--accent);
+  font-size:44px;
+  font-weight:800;
+}
+.subtitle{
+  color:var(--accent-2);
+  font-weight:700;
+  margin-top:8px;
+  font-size:20px;
+}
+
+/* Nav */
+.menu-toggle{
+  position:absolute;
+  right:18px;
+  top:18px;
+  border:0;
+  background:transparent;
+  font-size:22px;
+  cursor:pointer;
+}
+.nav ul{
+  list-style:none;
+  padding:0;
+  margin:12px 0 0;
+  display:flex;
+  justify-content:center;
+  gap: 18px;
+}
+.nav-link{
+  text-decoration:none;
+  color:var(--muted);
+  font-weight:700;
+  cursor:pointer;
+}
+.nav-link:hover{ color:var(--accent); }
+.nav ul li { position:relative; }
+.nav ul li:not(:last-child)::after{
+  content: "|";
+  color: var(--muted);
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight:700;
+}
+
+/* Card */
+.card{
+  border:1px solid var(--card-border);
+  background:var(--card);
+  padding: 36px 28px;
+  box-shadow: var(--shadow);
+  border-radius:6px;
+}
+.card-title{
+  text-align:center;
+  color:var(--accent);
+  margin-bottom:18px;
+  font-size:26px;
+  font-weight:800;
+}
+
+/* Exercises */
+.exercise{ display:none; }
+.exercise.visible{ display:block; }
+
+/* Hiding label for minutes range */
+label[for="minutesRange"]{ display:none; }
+
+/* Slider container */
+.control-row{
+  display:flex;
+  justify-content:center;
+  margin: 6px 0 8px;
+}
+
+/* slider */
+input[type="range"]{
+  width:60%;
+  max-width:640px;
+  height:14px;
+  appearance:none;
+  background:transparent;
+  outline:none;
+  margin: 0;
+  --track-height:12px;
+}
+
+/* track thumb */
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:var(--accent);
+  border:5px solid #fff;
+  margin-top: -5px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  cursor:pointer;
+}
+input[type="range"]::-moz-range-thumb{
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:var(--accent);
+  border:4px solid #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  cursor:pointer;
+}
+
+/* Minutes display */
+.minutes-display{
+  text-align:center;
+  font-weight:800;
+  margin:12px 0 6px;
+  color:var(--accent);
+  font-size:22px;
+}
+
+/* Message*/
+.message{
+  text-align:center;
+  color:var(--muted);
+  margin:6px 12px 0;
+  font-size:16px;
+  line-height:1.4;
+}
+
+/* Countdown message */
+.countdown-message{
+  text-align:center;
+  color:var(--muted);
+  font-weight:700;
+  font-size:18px;
+}
+.small-note{
+  text-align:center;
+  color:#9aa7a3;
+  font-size:13px;
+  margin-top:10px;
+}
+
+/* Footer */
+.card-footer{
+  background: #eef3ef;
+  padding:14px;
+  text-align:center;
+  color:var(--muted);
+  border-radius:6px;
+  margin-top:6px;
+}
+
+/* Responsive */
+@media (max-width:720px){
+  .title{ font-size:28px; }
+  .card{ padding: 18px; }
+  input[type="range"]{ width:86%; }
+  .minutes-display{ font-size:18px; }
+  .message{ font-size:15px; }
+  .nav ul{ flex-direction:column; display:none; }
+  .nav[aria-hidden="false"] ul{ display:flex; }
+  .nav ul li:not(:last-child)::after{ content: none; }
+  .menu-toggle{ display:block; }
+}
+@media (min-width:721px){
+  .menu-toggle{ display:none; }
+  .nav ul{ display:flex !important; }
+}

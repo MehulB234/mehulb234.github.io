@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Assignment 6 — Conditonals</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page-wrapper">
+    <header class="card-header">
+      <h1 class="title">Assignment 6</h1>
+
+      <div class="subtitle">If Statements</div>
+
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navList">
+        <span class="arrow" aria-hidden="true">▾</span>
+      </button>
+
+      <nav class="nav" id="navList" aria-label="Exercises">
+        <ul>
+          <li><a href="#" id="exercise1Link" class="nav-link">Exercise 1</a></li>
+          <li><a href="#" id="exercise2Link" class="nav-link">Exercise 2</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="card">
+      <!-- Slider -->
+      <article id="exercise1" class="exercise visible">
+        <h2 class="card-title">How many minutes until class?</h2>
+
+        <div class="control-row">
+          <label for="minutesRange" class="sr-only">Minutes until class</label>
+          <input id="minutesRange" type="range" min="0" max="60" value="24" />
+        </div>
+
+        <p class="minutes-display" id="minutesDisplay">24 minutes</p>
+
+        <p class="message" id="sliderMessage">☕️ Grab your coffee. No one will judge if you're 5 minutes late.</p>
+      </article>
+
+      <!-- Countdown -->
+      <article id="exercise2" class="exercise">
+        <h2 class="card-title">Countdown till class</h2>
+        <p class="countdown-message" id="countdownMessage">Calculating...</p>
+        <p class="small-note">Class starts at 8:30 AM est.</p>
+      </article>
+    </section>
+
+    <!-- footer -->
+    <footer class="card-footer">@mehulbellukutty</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
