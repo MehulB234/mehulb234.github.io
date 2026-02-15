@@ -41,11 +41,6 @@ function showSlide(index){
 document.getElementById('hero-prev').addEventListener('click', () => showSlide((current - 1 + slides.length) % slides.length));
 document.getElementById('hero-next').addEventListener('click', () => showSlide((current + 1) % slides.length));
 
-// autoplay
-let heroTimer = setInterval(() => showSlide((current + 1) % slides.length), 6000);
-hero.addEventListener('mouseenter', () => clearInterval(heroTimer));
-hero.addEventListener('mouseleave', () => heroTimer = setInterval(() => showSlide((current + 1) % slides.length), 6000));
-
 // scroller
 const row = document.getElementById('featured-row');
 const left = document.getElementById('feat-left');
