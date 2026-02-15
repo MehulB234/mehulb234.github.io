@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GamerGauntlet — Home</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <div class="topbar">The store with all a gamer's needs!</div>
+
+    <nav>
+      <div class="brand">
+        <div class="logo">Gamer<span class="green">Gauntlet</span></div>
+      </div>
+
+      <div class="navlinks">
+        <a href="#" class="active">Home</a>
+        <a href="#">Catalog</a>
+        <a href="#">News</a>
+        <a href="#">About Us</a>
+      </div>
+
+      <div class="icons">
+        <a class="icon" href="index.html#" title="Wishlist">♥</a>
+        <a class="icon" href="index.html#" title="Cart">🛒</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+
+    <div class="hero" id="hero">
+      <div class="hero-controls">
+        <button class="hero-btn" id="hero-prev" aria-label="Previous slide">‹</button>
+        <div class="dots" id="hero-dots" role="tablist"></div>
+        <button class="hero-btn" id="hero-next" aria-label="Next slide">›</button>
+      </div>
+    </div>
+
+    <section aria-labelledby="featured-title">
+      <h2 id="featured-title" class="section-title">Featured Games</h2>
+
+      <div class="featured-wrap">
+        <button class="scroller-arrow left" id="feat-left" aria-label="Scroll left">◂</button>
+        <div class="featured-row" id="featured-row" tabindex="0">
+
+          <article class="game-card">
+            <div class="game-thumb">
+              <img src="images/EldenRing.png" alt="Elden Ring cover">
+            </div>
+            <div class="game-body">
+              <div class="game-title">Elden Ring</div>
+              <div class="game-meta">PS5/PC/Xbox</div>
+              <div class="price-row">
+                <div class="price">$59.99</div>
+                <a href="index.html#" class="add-btn">Add to Cart</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-thumb">
+              <img src="images/CallOfDuty.png" alt="Call of Duty cover">
+            </div>
+            <div class="game-body">
+              <div class="game-title">Call of Duty</div>
+              <div class="game-meta">Xbox/PS5/PC</div>
+              <div class="price-row">
+                <div class="price">$59.99</div>
+                <a href="index.html#" class="add-btn">Add to Cart</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-thumb">
+              <img src="images/Cyberpunk2077.png" alt="Cyberpunk 2077 cover">
+            </div>
+            <div class="game-body">
+              <div class="game-title">Cyberpunk 2077</div>
+              <div class="game-meta">PC/Xbox/PS5</div>
+              <div class="price-row">
+                <div class="price">$49.99</div>
+                <a href="index.html#" class="add-btn">Add to Cart</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-thumb">
+              <img src="images/FC26.png" alt="FC 26 cover">
+            </div>
+            <div class="game-body">
+              <div class="game-title">FC 26</div>
+              <div class="game-meta">PS5/Xbox/PC</div>
+              <div class="price-row">
+                <div class="price">$69.99</div>
+                <a href="index.html#" class="add-btn">Add to Cart</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+        <button class="scroller-arrow right" id="feat-right" aria-label="Scroll right">▸</button>
+      </div>
+    </section>
+
+    <section aria-labelledby="news-title">
+      <h2 id="news-title" class="section-title">Gaming News</h2>
+
+      <div class="news-grid">
+        <article class="news-card">
+          <div class="news-thumb">
+            <img src="images/spiderman.png" alt="Spider-Man 2 image">
+          </div>
+          <div class="news-body">
+            <div class="tag">Coming April 2026</div>
+            <h3 class="news-title">
+              <a href="index.html#" class="news-link">Spider-Man 2</a>
+            </h3>
+            <p class="news-desc">The highly anticipated sequel returns with bigger set pieces.</p>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <div class="news-thumb">
+            <img src="images/mortalkombat.png" alt="Mortal Kombat image">
+          </div>
+          <div class="news-body">
+            <div class="tag">Coming September 2026</div>
+            <h3 class="news-title">
+              <a href="index.html#" class="news-link">Mortal Kombat</a>
+            </h3>
+            <p class="news-desc">New fighters and next-level visuals announced.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <div style="font-weight:700">Gamer<span style="color:var(--accent)">Gauntlet</span></div>
+      <div style="margin-top:8px;color:var(--muted)">2026 GamerGauntlet </div>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
