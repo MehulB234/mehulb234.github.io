@@ -1,11 +1,18 @@
 /* Main Structure */
 :root {
     --main-background:#bde0fe;
+    --donation:0%;
 }
 
 body {
     font-family:Arial, Helvetica, sans-serif;
     background:var(--main-background);
+    color:darkslategray;
+}
+
+#main-content {
+    width:80%;
+    margin:auto;
 }
 
 #main-header {
@@ -47,6 +54,10 @@ img {
     background:rgba(255,255,255, 0.8);
     padding:5px;
     max-width:40%;
+}
+
+#movie {
+    width:100%;
 }
 
 /* Gallery */
@@ -109,9 +120,14 @@ nav a {
 
 /* Date */
 #p-date {
-    display:abosulute;
-    top:10px;
+    position:absolute;
+    top:0;
+    padding:10px;
     color:white;
+}
+
+.error {
+    color:#e29578;
 }
 
 /* Ball */
@@ -160,7 +176,7 @@ nav a {
     height:200px;
     margin-right:10%;
     border:2px solid turquoise;
-    background:linear-gradient(0deg, red 0% var(--donation-percent), white var(--donation-percent) 100%);
+    background:linear-gradient(0deg, red 0% var(--donation), white var(--donation) 100%);
 }
 
 /* Typography */
@@ -172,6 +188,11 @@ nav a {
 
 h3 {
     color:#05668d;
+}
+
+h4 {
+    color:#00a896;
+    font-weight: 200;
 }
 
 a {
