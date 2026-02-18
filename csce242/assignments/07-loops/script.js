@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
+
+document.addEventListener("DOMContentLoaded", () => {
 
   const water = document.getElementById("water");
   const bubbleCount = 20;
@@ -9,21 +10,22 @@ document.addEventListener("DOMContentLoaded", function () {
     bubble.classList.add("bubble");
 
     const size = Math.random() * 17 + 8;
-    bubble.style.width = size + "px";
-    bubble.style.height = size + "px";
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
 
-    bubble.style.left = Math.random() * 80 + 10 + "%";
+    bubble.style.left = `${Math.random() * 80 + 10}%`;
 
     const startBottom = Math.random() * 20 + 8;
-    bubble.style.setProperty("--b-start", startBottom + "%");
+    bubble.style.setProperty("--b-start", `${startBottom}%`);
 
     const speed = Math.random() * 5 + 5;
 
     const delay = -Math.random() * speed;
 
-    bubble.style.animation =
-      "floatUp " + speed + "s linear " + delay + "s infinite, " +
-      "drift 4s ease-in-out " + delay + "s infinite";
+    bubble.style.animation = `
+      floatUp ${speed}s linear ${delay}s infinite,
+      drift 4s ease-in-out ${delay}s infinite
+    `;
 
     water.appendChild(bubble);
   }
