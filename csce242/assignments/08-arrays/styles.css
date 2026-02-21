@@ -1,0 +1,62 @@
+body {
+    background: white;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+  }
+  
+  .card {
+    background: #f0f1e7;
+    width: 700px;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #4a8b8c;
+    margin: 0;
+    font-size: 40px;
+  }
+  
+  h2 {
+    color: #d78181;
+    margin-top: 5px;
+  }
+  
+  .controls {
+    margin: 20px 0;
+  }
+  
+  select {
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  .song-list {
+    margin-top: 20px;
+  }
+  
+  .song-list a {
+    display: block;
+    margin: 10px 0;
+    color: #4a8b8c;
+    text-decoration: underline;
+  }
+  
+  .song-list a:hover {
+    color: black;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #videoContainer {
+    margin-top: 25px;
+  }
+  
+  .footer {
+    margin-top: 20px;
+    color: #d78181;
+  }
