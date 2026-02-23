@@ -17,7 +17,7 @@ slides.forEach((s, i) => {
       <div class="eyebrow">GamerGauntlet</div>
       <h1>${s.title}</h1>
       <p>${s.subtitle}</p>
-      <a class="cta" href="#">Browse Games</a>
+      <a class="cta" href="../part5/Catalog/index.html">Browse Games</a>
     </div>`;
   slide.style.display = i === 0 ? 'grid' : 'none';
   hero.insertBefore(slide, hero.firstChild);
