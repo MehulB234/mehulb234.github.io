@@ -39,7 +39,7 @@ header{position:sticky;top:0;z-index:30}
   font-weight:600;
 }
 
-/* centered nav */
+/* centered nav */ /* hero */
 nav{
   background:var(--nav);
   display:grid;
