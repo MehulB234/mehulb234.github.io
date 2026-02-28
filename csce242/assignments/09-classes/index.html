@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JavaScript: Classes — Music Gallery</title>
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1>Classes</h1>
+    <p class="subtitle">Music Time</p>
+  </header>
+
+  <main>
+    <section id="gallery" class="gallery"></section>
+  </main>
+
+  <div id="songModal" class="w3-modal" style="display:none;">
+    <div class="w3-modal-content modal-flex">
+      <div class="modal-video">
+        <div id="videoContainer" class="video-wrapper">
+        </div>
+      </div>
+
+      <div id="infoPanel" class="info-panel w3-pale-blue">
+        <span id="modalClose" class="close-x" title="Close">×</span>
+        <h2 id="infoTitle">Title</h2>
+        <p class="meta"><strong>by</strong> <span id="infoArtist"></span></p>
+        <p id="infoAlbum"></p>
+        <p id="infoGenre"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

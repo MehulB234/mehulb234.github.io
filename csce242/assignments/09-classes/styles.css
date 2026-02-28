@@ -1,0 +1,136 @@
+:root{
+    --card-width: 240px;
+    --card-radius: 8px;
+    --blue: #3b66b2;
+    --header-height: 140px;
+  }
+  
+  *{box-sizing:border-box;}
+  body{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin:0;
+    color:#333;
+    background:#f5f6f3;
+  }
+  
+  .page-header{
+    background: #eef0e9;
+    text-align:center;
+    padding:20px 0 36px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .page-header h1{
+    margin: 6px 0;
+    font-size:40px;
+    color:#336b63;
+  }
+  .page-header .subtitle{
+    color:#d07a7a;
+    margin-top:6px;
+  }
+  
+  .gallery{
+    display:flex;
+    gap:28px;
+    justify-content:center;
+    align-items:flex-start;
+    padding:40px;
+    flex-wrap:wrap;
+    max-width:1200px;
+    margin:0 auto 80px;
+  }
+  
+  .song-card{
+    width:var(--card-width);
+    border-radius:var(--card-radius);
+    overflow:hidden;
+    background:white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    cursor:pointer;
+    transition: transform .15s ease;
+  }
+  .song-card:hover{ transform: translateY(-6px); }
+  
+  .song-card .card-top{
+    background:var(--blue);
+    color:white;
+    padding:14px 12px;
+    text-align:center;
+  }
+  .song-card .card-top h3{
+    margin:0;
+    font-size:18px;
+    font-weight:600;
+  }
+  .song-card .card-top .artist{
+    font-size:13px;
+    opacity:0.85;
+    margin-top:6px;
+  }
+  
+  .cover{
+    display:block;
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    background:#ddd;
+  }
+  
+  .w3-modal .w3-modal-content{
+    max-width:920px;
+    margin:auto;
+    padding:0;
+    border-radius:6px;
+    overflow:visible;
+    position:relative;
+    top:6%;
+  }
+  
+  .modal-flex{
+    display:flex;
+    flex-direction:row;
+    gap:0;
+  }
+  .modal-video{
+    flex:0 0 620px;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .video-wrapper{
+    width:100%;
+    height:360px;
+  }
+  .video-wrapper iframe{
+    width:100%;
+    height:100%;
+  }
+  
+  .info-panel{
+    flex:0 0 300px;
+    padding:22px;
+    position:relative;
+  }
+  .info-panel h2{ margin-top:0; color:#235072; }
+  .info-panel .meta{ color:#235072; margin:8px 0 14px; }
+  .close-x{
+    position:absolute;
+    top:8px;
+    right:12px;
+    font-size:20px;
+    cursor:pointer;
+  }
+  
+  @media (max-width:900px){
+    .modal-flex{ flex-direction:column; }
+    .modal-video{ flex:1; }
+    .info-panel{ width:100%; }
+    .video-wrapper{ height:240px; }
+  }
+  
+  @media (max-width:640px){
+    .gallery{ padding:18px; gap:14px; }
+    :root{ --card-width: 46%; }
+    .page-header h1{ font-size:30px;}
+  }
