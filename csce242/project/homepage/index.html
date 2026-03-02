@@ -16,6 +16,10 @@
         <div class="logo">Gamer<span class="green">Gauntlet</span></div>
       </div>
 
+      <button id="nav-toggle" class="nav-toggle" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+
       <div class="navlinks">
         <a href="index.html" class="active">Home</a>
         <a href="../part5/Catalog/index.html">Catalog</a>
@@ -28,6 +32,23 @@
         <a class="icon" href="../part5/Cart/index.html" title="Cart">🛒</a>
       </div>
     </nav>
+
+    <!-- Mobile nav panel (hidden by default) -->
+    <div id="mobile-nav" class="mobile-nav" hidden>
+      <div class="mobile-nav-inner" role="menu" aria-label="Main menu">
+        <a role="menuitem" href="index.html" class="mobile-link">Home</a>
+        <a role="menuitem" href="../part5/Catalog/index.html" class="mobile-link">Catalog</a>
+        <a role="menuitem" href="../part5/News/index.html" class="mobile-link">News</a>
+        <a role="menuitem" href="../part5/About/index.html" class="mobile-link">About Us</a>
+        <div class="mobile-icons">
+          <a class="icon mobile-icon" href="../part5/Wishlist/index.html" title="Wishlist">♥ Wishlist</a>
+          <a class="icon mobile-icon" href="../part5/Cart/index.html" title="Cart">🛒 Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- overlay -->
+    <div id="nav-overlay" class="nav-overlay" hidden></div>
   </header>
 
   <main class="wrap">
