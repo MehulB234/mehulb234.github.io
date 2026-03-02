@@ -139,11 +139,11 @@
         </article>
 
         <article class="catalog-card">
-          <a href="../FC26/index.html" class="thumb-link" aria-label="Open FC26 detail">
+          <button class="thumb" data-type="video" data-video="TSi0iJYSQ24" aria-label="Play FC 26 trailer">
             <div class="card-thumb">
               <img src="../../homepage/images/FC26.png" alt="FC 26 cover">
             </div>
-          </a>
+          </button>
           <div class="card-body">
             <div class="card-title"><a class="game-link" href="../FC26/index.html">FC 26</a></div>
             <div class="card-meta">PlayStation</div>
@@ -229,5 +229,13 @@
   </main>
 
   <script src="script.js"></script>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Media viewer">
+    <button class="lb-close" aria-label="Close (Esc)">✕</button>
+    <div class="lb-content" tabindex="-1"></div>
+    <button class="lb-prev" aria-label="Previous">‹</button>
+    <button class="lb-next" aria-label="Next">›</button>
+  </div>
+  <div id="lb-overlay" class="lb-overlay" aria-hidden="true"></div>
 </body>
 </html>
