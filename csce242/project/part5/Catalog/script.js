@@ -116,8 +116,9 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 
-  const thumbs = Array.from(document.querySelectorAll('.thumb'));
-  if (!thumbs.length) return;
+const thumbs = Array.from(document.querySelectorAll('.thumb'));
+
+if (thumbs.length) {
 
   const lb = document.getElementById('lightbox');
   const overlay = document.getElementById('lb-overlay');
@@ -125,23 +126,25 @@ document.addEventListener('DOMContentLoaded', function(){
   const closeBtn = lb.querySelector('.lb-close');
 
   function openVideo(videoId){
+
     content.innerHTML = '';
 
     const iframe = document.createElement('iframe');
-    iframe.setAttribute('allowfullscreen','');
+
+    iframe.style.width = "min(960px,92vw)";
+    iframe.style.height = "min(540px,64vh)";
+    iframe.style.border = "0";
+
+    iframe.setAttribute("allowfullscreen", "");
     iframe.setAttribute(
-      'allow',
-      'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+      "allow",
+      "autoplay; encrypted-media; picture-in-picture"
     );
 
-    iframe.style.width = 'min(960px,92vw)';
-    iframe.style.height = 'min(540px,64vh)';
-    iframe.style.border = '0';
-
     iframe.src =
-      'https://www.youtube.com/embed/' +
+      "https://www.youtube.com/embed/" +
       videoId +
-      '?autoplay=1&mute=1&playsinline=1&rel=0';
+      "?autoplay=1&mute=1&playsinline=1&rel=0";
 
     content.appendChild(iframe);
 
@@ -181,4 +184,4 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   });
 
-});
+}} );
