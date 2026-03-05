@@ -65,7 +65,7 @@ body {
   color: #0b0b0b;
 }
 
-.cards {
+#projects .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--gap);
@@ -120,7 +120,7 @@ body {
 }
 
 @media (max-width: 1100px) {
-  .cards {
+  #projects .cards {
     grid-template-columns: repeat(2, 1fr);
   }
   .card {
@@ -130,7 +130,7 @@ body {
 
 @media (max-width: 700px) {
   #container { margin: 16px; padding: 18px; }
-  .cards {
+  #projects .cards {
     grid-template-columns: 1fr;
     gap: 20px;
   }
@@ -146,6 +146,72 @@ a:focus {
   border-radius: 6px;
 }
 
-.cards .card:last-child {
-  grid-column: 2;
+@media (min-width: 1101px) {
+  #projects .cards .card:last-child {
+    grid-column: 2;
+  }
+
+  #projects .cards .card:last-child .card-title {
+    text-align: center;
+  }
+}
+
+#assignments .cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#assignments .card {
+  padding: 14px;
+  min-height: 260px;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card-bg);
+  color: var(--text);
+  box-sizing: border-box;
+}
+
+#assignments .card-img {
+  height: 110px;
+  max-height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+#assignments .card-desc {
+  margin-top: auto;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #222;
+}
+
+#assignments .card-desc a {
+  display: block;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 1100px) {
+  #assignments .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  #assignments .cards {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  #assignments .card {
+    min-height: auto;
+  }
+  #assignments .card-img {
+    height: 160px;
+    max-height: none;
+  }
 }
