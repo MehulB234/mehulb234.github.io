@@ -101,4 +101,86 @@ document.addEventListener('DOMContentLoaded', function () {
     hero.addEventListener('mouseleave', function(){ auto = setInterval(function(){ index = (index + 1) % slides.length; renderHero(index); }, 6000); });
   }
 
+  (function () {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+    const submitBtn = document.getElementById('submit-btn');
+    const resultEl = document.getElementById('contact-result');
+    const endpointInput = document.getElementById('form-endpoint');
+    const ENDPOINT = endpointInput ? endpointInput.value.trim() : 'https://api.web3forms.com/submit';
+    const accessKeyInput = document.getElementById('access_key');
+    const ACCESS_KEY = accessKeyInput ? accessKeyInput.value.trim() : '';
+
+    function showResult(message, type) {
+      resultEl.className = 'result';
+      if (type) resultEl.classList.add(type);
+      resultEl.textContent = message;
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      resultEl.textContent = '';
+      resultEl.className = 'result';
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        showResult('Please complete the required fields.', 'error');
+        return;
+      }
+
+      const data = {
+        access_key: ACCESS_KEY,
+        name: (form.querySelector('[name="name"]').value || '').trim(),
+        email: (form.querySelector('[name="email"]').value || '').trim(),
+        subject: (form.querySelector('[name="subject"]').value || '').trim(),
+        message: (form.querySelector('[name="message"]').value || '').trim()
+      };
+
+      if (!data.email || data.email.length < 5) {
+        showResult('Please provide a valid email address.', 'error');
+        return;
+      }
+      if (!data.message || data.message.length < 8) {
+        showResult('Message is too short (min 8 characters).', 'error');
+        return;
+      }
+      if (!data.access_key) {
+        showResult('Form access key is not configured. Please add your Web3Forms access key.', 'error');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.setAttribute('aria-busy', 'true');
+      const originalLabel = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+
+      try {
+        const resp = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        const json = await resp.json().catch(() => null);
+
+        if (resp.ok && json && (json.success || json.status === 'success')) {
+          showResult('Thanks — your message was sent. We will reply to your email shortly.', 'success');
+          form.reset();
+        } else {
+          const msg = (json && (json.message || json.error)) ? (json.message || json.error) : 'Failed to send — please try again later.';
+          showResult(msg, 'error');
+        }
+      } catch (err) {
+        console.error('Contact form error:', err);
+        showResult('Network error — check your connection and try again.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.removeAttribute('aria-busy');
+        submitBtn.textContent = originalLabel;
+      }
+    });
+  })();
 });
