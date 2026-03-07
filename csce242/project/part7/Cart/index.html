@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GamerGauntlet — Cart</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="topbar">The store with all a gamer's needs!</div>
+    <nav>
+      <div class="brand">
+        <div class="logo">Gamer<span class="green">Gauntlet</span></div>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+      <div class="navlinks" id="navlinks">
+        <a href="../../homepage/index.html">Home</a>
+        <a href="../Catalog/index.html">Catalog</a>
+        <a href="../News/index.html">News</a>
+        <a href="../About/index.html">About Us</a>
+      </div>
+      <div class="icons">
+        <a class="icon" href="../Wishlist/index.html" title="Wishlist">♥</a>
+        <a class="icon" href="index.html" title="Cart">🛒</a>
+      </div>
+    </nav>
+    <div id="mobile-nav" class="mobile-nav" hidden>
+      <div class="mobile-nav-inner" role="menu" aria-label="Main menu">
+        <a role="menuitem" href="../../homepage/index.html" class="mobile-link">Home</a>
+        <a role="menuitem" href="../Catalog/index.html" class="mobile-link">Catalog</a>
+        <a role="menuitem" href="../News/index.html" class="mobile-link">News</a>
+        <a role="menuitem" href="../About/index.html" class="mobile-link">About Us</a>
+        <div class="mobile-icons">
+          <a class="icon mobile-icon" href="../Wishlist/index.html" title="Wishlist">♥ Wishlist</a>
+          <a class="icon mobile-icon" href="index.html" title="Cart">🛒 Cart</a>
+        </div>
+      </div>
+    </div>
+    <div id="nav-overlay" class="nav-overlay" hidden></div>
+  </header>
+
+  <main class="wrap">
+    <h1 class="page-title">Shopping Cart</h1>
+
+    <section class="empty-panel" role="region" aria-labelledby="cart-empty">
+      <div class="empty-inner">
+        <svg class="cart-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M6 6h15l-1.5 9h-12zM6 6l-2-4M7 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+        </svg>
+        <h2 id="cart-empty">Your cart is empty</h2>
+        <p class="muted">Add some games to get started!</p>
+        <div class="empty-actions">
+          <a class="primary-btn" href="../Catalog/index.html">Browse Catalog</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cart-section" aria-hidden="true">
+      <h2 class="section-title">Items in your cart</h2>
+      <div class="cart-grid" id="cart-grid"></div>
+
+      <aside class="cart-summary" id="cart-summary">
+        <div class="summary-row"><div>Subtotal</div><div id="subtotal">$0.00</div></div>
+        <div class="summary-row"><div>Tax (8%)</div><div id="tax">$0.00</div></div>
+        <div class="summary-row total"><div>Total</div><div id="total">$0.00</div></div>
+        <div style="margin-top:18px">
+          <button class="checkout-btn" id="checkout-btn">Proceed to Checkout</button>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="site-footer">
+      <div class="brand-footer">
+        Gamer<span class="accent">Gauntlet</span>
+      </div>
+      <div class="muted-small">
+        2026 GamerGauntlet
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

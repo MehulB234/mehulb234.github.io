@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GamerGauntlet — Catalog</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="topbar">The store with all a gamer's needs!</div>
+    <nav>
+      <div class="brand">
+        <div class="logo">Gamer<span class="green">Gauntlet</span></div>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+      <div class="navlinks" id="navlinks">
+        <a href="../../homepage/index.html">Home</a>
+        <a href="index.html" class="active">Catalog</a>
+        <a href="../News/index.html">News</a>
+        <a href="../About/index.html">About Us</a>
+      </div>
+      <div class="icons">
+        <a class="icon" href="../Wishlist/index.html" title="Wishlist">♥</a>
+        <a class="icon" href="../Cart/index.html" title="Cart">🛒</a>
+      </div>
+    </nav>
+    <div id="mobile-nav" class="mobile-nav" hidden>
+      <div class="mobile-nav-inner" role="menu" aria-label="Main menu">
+        <a role="menuitem" href="../../homepage/index.html" class="mobile-link">Home</a>
+        <a role="menuitem" href="index.html" class="mobile-link">Catalog</a>
+        <a role="menuitem" href="../News/index.html" class="mobile-link">News</a>
+        <a role="menuitem" href="../About/index.html" class="mobile-link">About Us</a>
+        <div class="mobile-icons">
+          <a class="icon mobile-icon" href="../Wishlist/index.html" title="Wishlist">♥ Wishlist</a>
+          <a class="icon mobile-icon" href="../Cart/index.html" title="Cart">🛒 Cart</a>
+        </div>
+      </div>
+    </div>
+    <div id="nav-overlay" class="nav-overlay" hidden></div>
+  </header>
+
+  <main class="wrap">
+    <div class="hero" id="hero">
+      <div class="hero-inner" id="hero-inner">
+        <div class="eyebrow">Featured</div>
+        <h1>Browse Games</h1>
+        <p class="hero-lead">The collection — find your next favorite.</p>
+      </div>
+      <div class="hero-controls">
+        <button class="hero-btn" id="hero-prev" aria-label="Previous slide">‹</button>
+        <div class="dots" id="hero-dots" role="tablist"></div>
+        <button class="hero-btn" id="hero-next" aria-label="Next slide">›</button>
+      </div>
+    </div>
+
+    <h1 class="page-title">Game Catalog</h1>
+
+    <div class="filters">
+      <div class="filter-group">
+        <div class="filter-label">Category</div>
+        <div class="chips">
+          <button class="chip active">All</button>
+          <button class="chip">RPG</button>
+          <button class="chip">Shooter</button>
+          <button class="chip">Action</button>
+          <button class="chip">Sports</button>
+          <button class="chip">Adventure</button>
+          <button class="chip">Sandbox</button>
+          <button class="chip">Battle Royale</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-label">Console</div>
+        <div class="chips">
+          <button class="chip active">All</button>
+          <button class="chip">PlayStation</button>
+          <button class="chip">Xbox</button>
+          <button class="chip">PC</button>
+          <button class="chip">Nintendo Switch</button>
+        </div>
+      </div>
+    </div>
+
+    <section aria-labelledby="catalog-title">
+      <h2 id="catalog-title" class="section-title sr-only">Catalog List</h2>
+
+      <div class="catalog-grid">
+
+        <article class="catalog-card">
+          <a href="../EldenRing/index.html" class="thumb-link" aria-label="Open Elden Ring detail">
+            <div class="card-thumb">
+              <img src="../../homepage/images/EldenRing.png" alt="Elden Ring cover">
+            </div>
+          </a>
+          <div class="card-body">
+            <div class="card-title"><a class="game-link" href="../EldenRing/index.html">Elden Ring</a></div>
+            <div class="card-meta">PlayStation</div>
+            <div class="card-bottom">
+              <div class="price">$59.99</div>
+              <a class="add-btn" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="catalog-card">
+          <a href="../CallOfDuty/index.html" class="thumb-link" aria-label="Open Call of Duty detail">
+            <div class="card-thumb">
+              <img src="../../homepage/images/CallOfDuty.png" alt="Call of Duty cover">
+            </div>
+          </a>
+          <div class="card-body">
+            <div class="card-title"><a class="game-link" href="../CallOfDuty/index.html">Call of Duty</a></div>
+            <div class="card-meta">Xbox</div>
+            <div class="card-bottom">
+              <div class="price">$59.99</div>
+              <a class="add-btn" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="catalog-card">
+          <a href="../Cyberpunk2077/index.html" class="thumb-link" aria-label="Open Cyberpunk 2077 detail">
+            <div class="card-thumb">
+              <img src="../../homepage/images/Cyberpunk2077.png" alt="Cyberpunk 2077 cover">
+            </div>
+          </a>
+          <div class="card-body">
+            <div class="card-title"><a class="game-link" href="../Cyberpunk2077/index.html">Cyberpunk 2077</a></div>
+            <div class="card-meta">PC</div>
+            <div class="card-bottom">
+              <div class="price">$49.99</div>
+              <a class="add-btn" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="catalog-card">
+          <button class="thumb" data-type="video" data-video="TSi0iJYSQ24" aria-label="Play FC 26 trailer">
+            <div class="card-thumb">
+              <img src="../../homepage/images/FC26.png" alt="FC 26 cover">
+            </div>
+          </button>
+          <div class="card-body">
+            <div class="card-title"><a class="game-link" href="../FC26/index.html">FC 26</a></div>
+            <div class="card-meta">PlayStation</div>
+            <div class="card-bottom">
+              <div class="price">$69.99</div>
+              <a class="add-btn" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="catalog-card">
+          <a href="../AssassinsCreed/index.html" class="thumb-link" aria-label="Open Assassin's Creed detail">
+            <div class="card-thumb">
+              <img src="Images/Assassin.png" alt="Assassin's Creed cover">
+            </div>
+          </a>
+          <div class="card-body">
+            <div class="card-title"><a class="game-link" href="../AssassinsCreed/index.html">Assassin's Creed</a></div>
+            <div class="card-meta">Xbox</div>
+            <div class="card-bottom">
+              <div class="price">$54.99</div>
+              <a class="add-btn" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="catalog-card">
+          <a href="../Minecraft/index.html" class="thumb-link" aria-label="Open Minecraft detail">
+            <div class="card-thumb">
+              <img src="Images/Minecraft.png" alt="Minecraft cover">
+            </div>
+          </a>
+          <div class="card-body">
+            <div class="card-title"><a class="game-link" href="../Minecraft/index.html">Minecraft</a></div>
+            <div class="card-meta">PC</div>
+            <div class="card-bottom">
+              <div class="price">$29.99</div>
+              <a class="add-btn" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="catalog-card">
+          <a href="../GodOfWar/index.html" class="thumb-link" aria-label="Open God of War detail">
+            <div class="card-thumb">
+              <img src="Images/GodOfWar.png" alt="God of War cover">
+            </div>
+          </a>
+          <div class="card-body">
+            <div class="card-title"><a class="game-link" href="../GodOfWar/index.html">God of War</a></div>
+            <div class="card-meta">PlayStation</div>
+            <div class="card-bottom">
+              <div class="price">$59.99</div>
+              <a class="add-btn" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="catalog-card">
+          <a href="../Halo/index.html" class="thumb-link" aria-label="Open Halo Infinite detail">
+            <div class="card-thumb">
+              <img src="Images/Halo.png" alt="Halo Infinite cover">
+            </div>
+          </a>
+          <div class="card-body">
+            <div class="card-title"><a class="game-link" href="../Halo/index.html">Halo Infinite</a></div>
+            <div class="card-meta">Xbox</div>
+            <div class="card-bottom">
+              <div class="price">$59.99</div>
+              <a class="add-btn" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <footer>
+      <div style="font-weight:700">Gamer<span style="color:var(--accent)">Gauntlet</span></div>
+      <div style="margin-top:8px;color:var(--muted)">2026 GamerGauntlet </div>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Media viewer">
+    <button class="lb-close" aria-label="Close (Esc)">✕</button>
+    <div class="lb-content" tabindex="-1"></div>
+    <button class="lb-prev" aria-label="Previous">‹</button>
+    <button class="lb-next" aria-label="Next">›</button>
+  </div>
+  <div id="lb-overlay" class="lb-overlay" aria-hidden="true"></div>
+</body>
+</html>

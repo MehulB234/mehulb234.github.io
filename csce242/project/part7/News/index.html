@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GamerGauntlet — News</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="topbar">The store with all a gamer's needs!</div>
+    <nav>
+      <div class="brand">
+        <div class="logo">Gamer<span class="green">Gauntlet</span></div>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+      <div class="navlinks" id="navlinks">
+        <a href="../../homepage/index.html">Home</a>
+        <a href="../Catalog/index.html">Catalog</a>
+        <a href="index.html" class="active">News</a>
+        <a href="../About/index.html">About Us</a>
+      </div>
+      <div class="icons">
+        <a class="icon" href="../Wishlist/index.html">♥</a>
+        <a class="icon" href="../Cart/index.html">🛒</a>
+      </div>
+    </nav>
+    <div id="mobile-nav" class="mobile-nav" hidden>
+      <div class="mobile-nav-inner" role="menu" aria-label="Main menu">
+        <a role="menuitem" href="../../homepage/index.html" class="mobile-link">Home</a>
+        <a role="menuitem" href="../Catalog/index.html" class="mobile-link">Catalog</a>
+        <a role="menuitem" href="index.html" class="mobile-link">News</a>
+        <a role="menuitem" href="../About/index.html" class="mobile-link">About Us</a>
+        <div class="mobile-icons">
+          <a class="icon mobile-icon" href="../Wishlist/index.html" title="Wishlist">♥ Wishlist</a>
+          <a class="icon mobile-icon" href="../Cart/index.html" title="Cart">🛒 Cart</a>
+        </div>
+      </div>
+    </div>
+    <div id="nav-overlay" class="nav-overlay" hidden></div>
+  </header>
+
+  <main class="wrap">
+
+    <h1 class="page-title">Gaming News</h1>
+
+    <section class="news-grid">
+
+      <article class="news-card">
+        <a href="../firstarticle/index.html" class="news-link">
+          <div class="news-thumb">
+            <img src="../../homepage/images/Spiderman.jpg" alt="Spider-Man 2">
+          </div>
+          <div class="news-body">
+            <div class="tag">Coming April 2026</div>
+            <h3 class="news-title">Spider-Man 2</h3>
+            <p class="news-desc">
+              The highly anticipated sequel returns with bigger set pieces.
+            </p>
+          </div>
+        </a>
+      </article>
+
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="../../homepage/images/mortalkombat.png" alt="Mortal Kombat">
+        </div>
+        <div class="news-body">
+          <div class="tag">Coming September 2026</div>
+          <h3 class="news-title">Mortal Kombat</h3>
+          <p class="news-desc">
+            New fighters and next-level visuals announced.
+          </p>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="../../homepage/images/HotDeals.png" alt="Hot Deals">
+        </div>
+        <div class="news-body">
+          <div class="tag">Deal</div>
+          <h3 class="news-title">Weekend Hot Deals — Up to 50% Off</h3>
+          <p class="news-desc">
+            Stock up on the best titles this weekend. Limited time offers on top releases and indie gems.
+          </p>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="../../homepage/images/TopReleases.png" alt="Release Roundup">
+        </div>
+        <div class="news-body">
+          <div class="tag">Top Story</div>
+          <h3 class="news-title">Release Roundup — February Highlights</h3>
+          <p class="news-desc">
+            A quick look at what shipped this month and what to watch for in March.
+          </p>
+        </div>
+      </article>
+
+    </section>
+
+    <footer>
+      <div style="font-weight:700">
+        Gamer<span style="color:var(--accent)">Gauntlet</span>
+      </div>
+      <div style="margin-top:8px;color:var(--muted)">
+        2026 GamerGauntlet
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
