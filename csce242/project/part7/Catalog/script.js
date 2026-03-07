@@ -1,9 +1,5 @@
-// script.js - copy & paste this whole file (replace existing)
 document.addEventListener('DOMContentLoaded', function(){
 
-  // -----------------------
-  // NAV TOGGLE (unchanged)
-  // -----------------------
   (function(){
     const toggleBtn = document.getElementById('nav-toggle');
     const mobileNav = document.getElementById('mobile-nav');
@@ -38,10 +34,6 @@ document.addEventListener('DOMContentLoaded', function(){
     overlay.addEventListener('click', () => setOpen(false));
   })();
 
-
-  // -----------------------
-  // HERO SLIDES (unchanged)
-  // -----------------------
   var slides=[
     {bg:'linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.85)), url("../../homepage/images/TopReleases.png") center/cover no-repeat',title:'Featured',lead:'Top stories & deals'},
     {bg:'linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.85)), url("../../homepage/images/HotDeals.png") center/cover no-repeat',title:'Hot Deals',lead:'Limited-time store offers'},
@@ -104,9 +96,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }
 
-  // -----------------------
-  // CHIP FILTERS (unchanged)
-  // -----------------------
+
   var chips=document.querySelectorAll('.chip');
   chips.forEach(function(c){
     c.addEventListener('click',function(){
@@ -115,49 +105,32 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 
-  // -----------------------
-  // JSON URL (cache-busted)
-  // -----------------------
-  // Always fetch the live catalog.json from the GitHub Pages root
   const jsonUrlBase = "https://mehulb234.github.io/csce242/json/catalog.json";
-  const jsonUrl = jsonUrlBase + "?v=" + Date.now(); // cache-bust so we always get latest JSON
+  const jsonUrl = jsonUrlBase + "?v=" + Date.now();
 
-  // -----------------------
-  // Resolve image URL — defensive and authoritative
-  // Input: item.img_name (various formats)
-  // Output: absolute https://mehulb234.github.io/csce242/project/homepage/...
-  // -----------------------
   function resolveImageUrl(imgName){
     if(!imgName) return '';
     let p = String(imgName).trim();
 
-    // If already absolute HTTP(S), return as-is
     if(/^https?:\/\//i.test(p)) return p;
 
-    // Normalize: ensure leading slash and collapse duplicate slashes
     if(!p.startsWith('/')) p = '/' + p;
     p = p.replace(/\/+/g, '/');
 
-    // If it's missing the project prefix (e.g. "/homepage/...") add it
-    // We specifically ensure the path contains "/csce242/project"
+
     if(/\/homepage\//i.test(p) && !/\/csce242\//i.test(p)){
       p = '/csce242/project' + p;
     }
 
-    // If it already contains /csce242/ accept it; else ensure it starts with /csce242/project
     if(!/\/csce242\//i.test(p)){
       p = '/csce242/project' + p;
     }
 
     const final = 'https://mehulb234.github.io' + p;
-    // debug log so you can copy/paste the final URL if something 404s
     console.debug('[resolveImageUrl] original:', imgName, '->', final);
     return final;
   }
 
-  // -----------------------
-  // fetch JSON and render catalog
-  // -----------------------
   fetch(jsonUrl)
     .then(r => {
       if(!r.ok) throw new Error('fetch failed: ' + r.status);
@@ -182,7 +155,6 @@ document.addEventListener('DOMContentLoaded', function(){
       return;
     }
 
-    // Clear (remove any static/hard-coded cards)
     grid.innerHTML = '';
 
     data.catalog.forEach(item => {
@@ -190,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function(){
       card.className = 'catalog-card';
 
       const imageUrl = resolveImageUrl(item.img_name || '');
-      // Build thumb (video vs link)
       let thumbHtml;
       if((item.media_type && item.media_type.toLowerCase() === 'video') || item.trailer_id){
         thumbHtml = `
@@ -227,20 +198,15 @@ document.addEventListener('DOMContentLoaded', function(){
       grid.appendChild(card);
     });
 
-    // After items inserted, wire up buttons and thumbs
     setupAddButtonsAndThumbs();
   }
 
-  // Simple, safe HTML escaper for inserted strings
   function escapeHtml(s){
     return String(s || '').replace(/[&<>"']/g, function(m){
       return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[m];
     });
   }
 
-  // -----------------------
-  // add buttons + lightbox
-  // -----------------------
   function setupAddButtonsAndThumbs(){
     // Add buttons
     const addBtns = Array.from(document.querySelectorAll('.add-btn'));
@@ -254,7 +220,6 @@ document.addEventListener('DOMContentLoaded', function(){
       });
     });
 
-    // Lightbox for video thumbs
     const thumbs = Array.from(document.querySelectorAll('.thumb'));
     if(!thumbs.length) return;
 
@@ -308,4 +273,4 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 
-}); // DOMContentLoaded end
+});
