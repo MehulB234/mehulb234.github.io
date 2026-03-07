@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
 
   (function(){
     const toggleBtn = document.getElementById('nav-toggle');
@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', function(){
   })();
 
   var slides=[
-    {bg:'linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.85)), url("../../homepage/images/TopReleases.png") center/cover no-repeat',title:'Featured',lead:'Top stories & deals'},
-    {bg:'linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.85)), url("../../homepage/images/HotDeals.png") center/cover no-repeat',title:'Hot Deals',lead:'Limited-time store offers'},
-    {bg:'linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.85)), url("../../homepage/images/Home.png") center/cover no-repeat',title:'Community',lead:'Projects and community highlights'}
+    {bg:'linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.85)), url("/csce242/project/homepage/images/TopReleases.png") center/cover no-repeat',title:'Featured',lead:'Top stories & deals'},
+    {bg:'linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.85)), url("/csce242/project/homepage/images/HotDeals.png") center/cover no-repeat',title:'Hot Deals',lead:'Limited-time store offers'},
+    {bg:'linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.85)), url("/csce242/project/homepage/images/Home.png") center/cover no-repeat',title:'Community',lead:'Projects and community highlights'}
   ];
 
   var hero=document.getElementById('hero');
@@ -96,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }
 
-
   var chips=document.querySelectorAll('.chip');
   chips.forEach(function(c){
     c.addEventListener('click',function(){
@@ -105,101 +104,7 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 
-  const jsonUrlBase = "https://mehulb234.github.io/csce242/json/catalog.json";
-  const jsonUrl = jsonUrlBase + "?v=" + Date.now();
-
-  function resolveImageUrl(imgName){
-    if(!imgName) return '';
-    let p = String(imgName).trim();
-
-    if(/^https?:\/\//i.test(p)) return p;
-
-    if(!p.startsWith('/')) p = '/' + p;
-    p = p.replace(/\/+/g, '/');
-
-
-    if(/\/homepage\//i.test(p) && !/\/csce242\//i.test(p)){
-      p = '/csce242/project' + p;
-    }
-
-    if(!/\/csce242\//i.test(p)){
-      p = '/csce242/project' + p;
-    }
-
-    const final = 'https://mehulb234.github.io' + p;
-    console.debug('[resolveImageUrl] original:', imgName, '->', final);
-    return final;
-  }
-
-  fetch(jsonUrl)
-    .then(r => {
-      if(!r.ok) throw new Error('fetch failed: ' + r.status);
-      return r.json();
-    })
-    .then(data => renderCatalog(data))
-    .catch(err => {
-      console.error('Failed to load catalog.json:', err);
-      const grid = document.querySelector('.catalog-grid');
-      if(grid) grid.innerHTML = '<p style="color:#f55;padding:16px;">Failed to load catalog.json</p>';
-    });
-
-  function renderCatalog(data){
-    if(!data || !Array.isArray(data.catalog)){
-      console.error('Invalid catalog format');
-      return;
-    }
-
-    const grid = document.querySelector('.catalog-grid');
-    if(!grid) {
-      console.error('No .catalog-grid element found');
-      return;
-    }
-
-    grid.innerHTML = '';
-
-    data.catalog.forEach(item => {
-      const card = document.createElement('article');
-      card.className = 'catalog-card';
-
-      const imageUrl = resolveImageUrl(item.img_name || '');
-      let thumbHtml;
-      if((item.media_type && item.media_type.toLowerCase() === 'video') || item.trailer_id){
-        thumbHtml = `
-          <button class="thumb" data-video="${item.trailer_id || ''}" aria-label="Play ${escapeHtml(item.title)} trailer">
-            <div class="card-thumb">
-              <img src="${imageUrl}" alt="${escapeHtml(item.img_alt || item.title || '')}">
-            </div>
-          </button>
-        `;
-      } else {
-        thumbHtml = `
-          <a href="${escapeHtml(item.detail_link || '#')}" class="thumb-link" aria-label="Open ${escapeHtml(item.title)} detail">
-            <div class="card-thumb">
-              <img src="${imageUrl}" alt="${escapeHtml(item.img_alt || item.title || '')}">
-            </div>
-          </a>
-        `;
-      }
-
-      const priceDisplay = item.price_display || (item.price ? "$" + Number(item.price).toFixed(2) : '');
-
-      card.innerHTML = `
-        ${thumbHtml}
-        <div class="card-body">
-          <div class="card-title"><a class="game-link" href="${escapeHtml(item.detail_link || '#')}">${escapeHtml(item.title || 'Untitled')}</a></div>
-          <div class="card-meta">${escapeHtml(item.platform || '')}</div>
-          <div class="card-bottom">
-            <div class="price">${escapeHtml(priceDisplay)}</div>
-            <a class="add-btn" href="#">Add to Cart</a>
-          </div>
-        </div>
-      `;
-
-      grid.appendChild(card);
-    });
-
-    setupAddButtonsAndThumbs();
-  }
+  const JSON_URL = '/csce242/json/catalog.json';
 
   function escapeHtml(s){
     return String(s || '').replace(/[&<>"']/g, function(m){
@@ -207,17 +112,172 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 
+  function formatPrice(p){
+    if(typeof p === 'number') return '$' + p.toFixed(2);
+    if(!p) return '';
+    return String(p);
+  }
+
+  function resolveImageUrl(imgName){
+    if(!imgName) return '';
+    let p = String(imgName).trim();
+    if(/^https?:\/\//i.test(p)) return p;
+    if(!p.startsWith('/')) p = '/' + p;
+    p = p.replace(/\/+/g, '/');
+    if(/\/homepage\//i.test(p) && !/\/csce242\//i.test(p)){
+      p = '/csce242/project' + p;
+    }
+    if(!/\/csce242\//i.test(p)){
+      p = '/csce242/project/homepage/images/' + p.replace(/^\/+/, '');
+    }
+    const final = 'https://mehulb234.github.io' + p;
+    return final;
+  }
+
+  const PLACEHOLDER = '/csce242/project/homepage/images/placeholder.png';
+
+  function showCatalogError(msg){
+    const grid = document.querySelector('.catalog-grid');
+    if(grid){
+      grid.innerHTML = '<div style="color:#f66;padding:18px;"><strong>Error:</strong> '+ escapeHtml(msg) +'</div>';
+    }
+    console.error('Catalog error:', msg);
+  }
+
+  function renderCatalog(data){
+    if(!data || !Array.isArray(data.catalog)){
+      showCatalogError('catalog.json has unexpected format (expected { "catalog": [...] })');
+      return;
+    }
+
+    const grid = document.querySelector('.catalog-grid');
+    if(!grid){
+      console.error('No .catalog-grid found on page');
+      return;
+    }
+
+    grid.innerHTML = '';
+
+    data.catalog.forEach(item => {
+      try {
+        const card = document.createElement('article');
+        card.className = 'catalog-card';
+
+        const imgUrl = resolveImageUrl(item.img_name || item.img || '');
+
+        let thumbWrap;
+        if((item.media_type && item.media_type.toLowerCase() === 'video') || item.trailer_id){
+          const btn = document.createElement('button');
+          btn.className = 'thumb';
+          btn.setAttribute('data-video', item.trailer_id || '');
+          btn.setAttribute('aria-label','Play '+ (item.title || 'video') +' trailer');
+          thumbWrap = btn;
+        } else {
+          const a = document.createElement('a');
+          a.className = 'thumb-link';
+          a.href = item.detail_link || '#';
+          a.setAttribute('aria-label','Open '+ (item.title || 'detail'));
+          thumbWrap = a;
+        }
+
+        const thumbDiv = document.createElement('div');
+        thumbDiv.className = 'card-thumb';
+
+        const img = document.createElement('img');
+        img.alt = item.img_alt || (item.title ? item.title + ' cover' : 'cover image');
+        img.src = imgUrl || PLACEHOLDER;
+        img.onerror = function(){
+          if(img.src && img.src.indexOf('/csce242/project/homepage/images/') === -1){
+            img.src = '/csce242/project/homepage/images/' + (item.img_name || '').split('/').pop();
+          } else {
+            img.src = PLACEHOLDER;
+          }
+        };
+
+        thumbDiv.appendChild(img);
+        thumbWrap.appendChild(thumbDiv);
+        card.appendChild(thumbWrap);
+
+        const body = document.createElement('div');
+        body.className = 'card-body';
+
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'card-title';
+        const titleLink = document.createElement('a');
+        titleLink.className = 'game-link';
+        titleLink.href = item.detail_link || '#';
+        titleLink.textContent = item.title || 'Untitled';
+        titleDiv.appendChild(titleLink);
+        body.appendChild(titleDiv);
+
+        const metaDiv = document.createElement('div');
+        metaDiv.className = 'card-meta';
+        metaDiv.textContent = item.platform || '';
+        body.appendChild(metaDiv);
+
+        const bottom = document.createElement('div');
+        bottom.className = 'card-bottom';
+
+        const priceDiv = document.createElement('div');
+        priceDiv.className = 'price';
+        priceDiv.textContent = item.price_display || formatPrice(item.price || 0);
+        bottom.appendChild(priceDiv);
+
+        const addBtn = document.createElement('a');
+        addBtn.className = 'add-btn';
+        addBtn.href = '#';
+        addBtn.textContent = 'Add to Cart';
+        addBtn.addEventListener('click', function(e){
+          e.preventDefault();
+          const prev = addBtn.textContent;
+          addBtn.textContent = 'Added ✓';
+          setTimeout(function(){ addBtn.textContent = prev; }, 900);
+        });
+        bottom.appendChild(addBtn);
+
+        body.appendChild(bottom);
+        card.appendChild(body);
+
+        grid.appendChild(card);
+      } catch (err){
+        console.warn('Failed to render item', item, err);
+      }
+    });
+
+    setupAddButtonsAndThumbs();
+
+    console.log('Catalog loaded:', data.catalog.length, 'items');
+  }
+
+  (function loadCatalog(){
+    const url = JSON_URL + '?_=' + Date.now();
+    const grid = document.querySelector('.catalog-grid');
+    if(grid) grid.innerHTML = '<div style="padding:24px;color:#999">Loading catalog…</div>';
+
+    fetch(url, { cache: 'no-store' })
+      .then(r => {
+        if(!r.ok) throw new Error('Failed to fetch ' + url + ' (status ' + r.status + ')');
+        return r.json();
+      })
+      .then(data => renderCatalog(data))
+      .catch(err => {
+        showCatalogError(err.message || String(err));
+      });
+  })();
+
   function setupAddButtonsAndThumbs(){
-    // Add buttons
     const addBtns = Array.from(document.querySelectorAll('.add-btn'));
     addBtns.forEach(function(b){
-      b.addEventListener('click', function(e){
-        e.preventDefault();
-        b.blur();
-        const prev = b.textContent;
-        b.textContent = 'Added ✓';
-        setTimeout(function(){ b.textContent = prev; }, 900);
-      });
+      if(!b._bound){
+        b.addEventListener('click', function(e){
+          e.preventDefault();
+          b.blur();
+          const prev = b.textContent;
+          b.textContent = 'Added ✓';
+          setTimeout(function(){ b.textContent = prev; }, 900);
+        });
+        b._bound = true;
+      }
     });
 
     const thumbs = Array.from(document.querySelectorAll('.thumb'));
@@ -225,10 +285,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
     const lb = document.getElementById('lightbox');
     const overlay = document.getElementById('lb-overlay');
-    const content = lb.querySelector('.lb-content');
-    const closeBtn = lb.querySelector('.lb-close');
+    const content = lb ? lb.querySelector('.lb-content') : null;
+    const closeBtn = lb ? lb.querySelector('.lb-close') : null;
 
     function openVideo(videoId){
+      if(!content || !lb) return;
       content.innerHTML = '';
       const iframe = document.createElement('iframe');
       iframe.style.width = "min(960px,92vw)";
@@ -238,36 +299,41 @@ document.addEventListener('DOMContentLoaded', function(){
       iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
       iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&mute=1&playsinline=1&rel=0";
       content.appendChild(iframe);
-
       lb.setAttribute('aria-hidden','false');
-      overlay.classList.add('open');
-      overlay.setAttribute('aria-hidden','false');
+      if(overlay) overlay.classList.add('open');
+      if(overlay) overlay.setAttribute('aria-hidden','false');
       document.documentElement.style.overflow='hidden';
       document.body.style.overflow='hidden';
     }
 
     function closeLightbox(){
-      lb.setAttribute('aria-hidden','true');
-      overlay.classList.remove('open');
-      overlay.setAttribute('aria-hidden','true');
+      const lbEl = document.getElementById('lightbox');
+      if(!lbEl || !content) return;
+      lbEl.setAttribute('aria-hidden','true');
+      if(overlay) overlay.classList.remove('open');
+      if(overlay) overlay.setAttribute('aria-hidden','true');
       content.innerHTML = '';
       document.documentElement.style.overflow='';
       document.body.style.overflow='';
     }
 
     thumbs.forEach(function(btn){
-      btn.addEventListener('click', function(e){
-        e.preventDefault();
-        const videoId = btn.dataset.video || btn.getAttribute('data-video');
-        if(videoId) openVideo(videoId);
-      });
+      if(!btn._thumbBound){
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          const videoId = btn.dataset.video || btn.getAttribute('data-video');
+          if(videoId) openVideo(videoId);
+        });
+        btn._thumbBound = true;
+      }
     });
 
-    closeBtn.addEventListener('click', closeLightbox);
-    overlay.addEventListener('click', closeLightbox);
+    if(closeBtn) closeBtn.addEventListener('click', closeLightbox);
+    if(overlay) overlay.addEventListener('click', closeLightbox);
 
     document.addEventListener('keydown', function(e){
-      if(lb.getAttribute('aria-hidden') === 'false' && e.key === 'Escape'){
+      const lbEl = document.getElementById('lightbox');
+      if(lbEl && lbEl.getAttribute('aria-hidden') === 'false' && e.key === 'Escape'){
         closeLightbox();
       }
     });

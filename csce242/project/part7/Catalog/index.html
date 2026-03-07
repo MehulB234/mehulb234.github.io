@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -22,8 +23,96 @@
         <a href="/csce242/project/part7/About/index.html">About Us</a>
       </div>
       <div class="icons">
-        <a class="icon" href="/csce242/project/part7/Wishlist/index.html">♥</a>
-        <a class="icon" href="/csce242/project/part7/Cart/index.html">🛒</a>
+        <a class="icon" href="/csce242/project/part7/Wishlist/index.html" title="Wishlist">♥</a>
+        <a class="icon" href="/csce242/project/part7/Cart/index.html" title="Cart">🛒</a>
       </div>
     </nav>
+    <div id="mobile-nav" class="mobile-nav" hidden>
+      <div class="mobile-nav-inner" role="menu" aria-label="Main menu">
+        <a role="menuitem" href="/csce242/project/homepage/index.html" class="mobile-link">Home</a>
+        <a role="menuitem" href="/csce242/project/part7/Catalog/index.html" class="mobile-link">Catalog</a>
+        <a role="menuitem" href="/csce242/project/part7/News/index.html" class="mobile-link">News</a>
+        <a role="menuitem" href="/csce242/project/part7/About/index.html" class="mobile-link">About Us</a>
+        <div class="mobile-icons">
+          <a class="icon mobile-icon" href="/csce242/project/part7/Wishlist/index.html" title="Wishlist">♥ Wishlist</a>
+          <a class="icon mobile-icon" href="/csce242/project/part7/Cart/index.html" title="Cart">🛒 Cart</a>
+        </div>
+      </div>
+    </div>
+    <div id="nav-overlay" class="nav-overlay" hidden></div>
   </header>
+
+  <main class="wrap">
+    <div class="hero" id="hero">
+      <div class="hero-inner" id="hero-inner">
+        <div class="eyebrow">Featured</div>
+        <h1>Browse Games</h1>
+        <p class="hero-lead">The collection — find your next favorite.</p>
+      </div>
+      <div class="hero-controls">
+        <button class="hero-btn" id="hero-prev" aria-label="Previous slide">‹</button>
+        <div class="dots" id="hero-dots" role="tablist"></div>
+        <button class="hero-btn" id="hero-next" aria-label="Next slide">›</button>
+      </div>
+    </div>
+
+    <h1 class="page-title">Game Catalog</h1>
+
+    <div class="filters">
+      <div class="filter-group">
+        <div class="filter-label">Category</div>
+        <div class="chips">
+          <button class="chip active">All</button>
+          <button class="chip">RPG</button>
+          <button class="chip">Shooter</button>
+          <button class="chip">Action</button>
+          <button class="chip">Sports</button>
+          <button class="chip">Adventure</button>
+          <button class="chip">Sandbox</button>
+          <button class="chip">Battle Royale</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-label">Console</div>
+        <div class="chips">
+          <button class="chip active">All</button>
+          <button class="chip">PlayStation</button>
+          <button class="chip">Xbox</button>
+          <button class="chip">PC</button>
+          <button class="chip">Nintendo Switch</button>
+        </div>
+      </div>
+    </div>
+
+    <section aria-labelledby="catalog-title">
+      <h2 id="catalog-title" class="section-title sr-only">Catalog List</h2>
+
+      <div class="catalog-grid">
+        <div class="loading" style="padding:48px;color:#999">Loading catalog…</div>
+      </div>
+    </section>
+
+    <footer>
+      <div style="font-weight:700">Gamer<span style="color:var(--accent)">Gauntlet</span></div>
+      <div style="margin-top:8px;color:var(--muted)">2026 GamerGauntlet </div>
+    </footer>
+  </main>
+
+  <script src="/csce242/project/part7/Catalog/script.js"></script>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Media viewer">
+    <button class="lb-close" aria-label="Close (Esc)">✕</button>
+    <div class="lb-content" tabindex="-1"></div>
+    <button class="lb-prev" aria-label="Previous">‹</button>
+    <button class="lb-next" aria-label="Next">›</button>
+  </div>
+  <div id="lb-overlay" class="lb-overlay" aria-hidden="true"></div>
+
+  <noscript>
+    <div style="padding:20px;background:#fff;color:#111;margin:16px;border-radius:6px;">
+      JavaScript is required to display the catalog. Please enable JavaScript and reload the page.
+    </div>
+  </noscript>
+</body>
+</html>
