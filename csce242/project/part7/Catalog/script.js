@@ -1,5 +1,9 @@
+// script.js - copy & paste this whole file (replace existing)
 document.addEventListener('DOMContentLoaded', function(){
 
+  // -----------------------
+  // NAV TOGGLE (unchanged)
+  // -----------------------
   (function(){
     const toggleBtn = document.getElementById('nav-toggle');
     const mobileNav = document.getElementById('mobile-nav');
@@ -35,6 +39,9 @@ document.addEventListener('DOMContentLoaded', function(){
   })();
 
 
+  // -----------------------
+  // HERO SLIDES (unchanged)
+  // -----------------------
   var slides=[
     {bg:'linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.85)), url("../../homepage/images/TopReleases.png") center/cover no-repeat',title:'Featured',lead:'Top stories & deals'},
     {bg:'linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.85)), url("../../homepage/images/HotDeals.png") center/cover no-repeat',title:'Hot Deals',lead:'Limited-time store offers'},
@@ -97,6 +104,9 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }
 
+  // -----------------------
+  // CHIP FILTERS (unchanged)
+  // -----------------------
   var chips=document.querySelectorAll('.chip');
   chips.forEach(function(c){
     c.addEventListener('click',function(){
@@ -105,38 +115,148 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 
-  const jsonUrl = "https://mehulB234.github.io/csce242/json/catalog.json";
+  // -----------------------
+  // JSON URL (cache-busted)
+  // -----------------------
+  // Always fetch the live catalog.json from the GitHub Pages root
+  const jsonUrlBase = "https://mehulb234.github.io/csce242/json/catalog.json";
+  const jsonUrl = jsonUrlBase + "?v=" + Date.now(); // cache-bust so we always get latest JSON
 
-  function absoluteImageUrl(imgName){
+  // -----------------------
+  // Resolve image URL — defensive and authoritative
+  // Input: item.img_name (various formats)
+  // Output: absolute https://mehulb234.github.io/csce242/project/homepage/...
+  // -----------------------
+  function resolveImageUrl(imgName){
     if(!imgName) return '';
-    if(imgName.startsWith('http://') || imgName.startsWith('https://')) return imgName;
-    return `https://mehulB234.github.io/${imgName.replace(/^\/+/, '')}`;
-  }
+    let p = String(imgName).trim();
 
-  function showCatalogError(msg){
-    console.error(msg);
-    const catalogGrid = document.querySelector('.catalog-grid');
-    if(catalogGrid){
-      catalogGrid.innerHTML = `<p class="error" style="color:#f33; padding:16px;">Could not load catalog: ${msg}</p>`;
+    // If already absolute HTTP(S), return as-is
+    if(/^https?:\/\//i.test(p)) return p;
+
+    // Normalize: ensure leading slash and collapse duplicate slashes
+    if(!p.startsWith('/')) p = '/' + p;
+    p = p.replace(/\/+/g, '/');
+
+    // If it's missing the project prefix (e.g. "/homepage/...") add it
+    // We specifically ensure the path contains "/csce242/project"
+    if(/\/homepage\//i.test(p) && !/\/csce242\//i.test(p)){
+      p = '/csce242/project' + p;
     }
+
+    // If it already contains /csce242/ accept it; else ensure it starts with /csce242/project
+    if(!/\/csce242\//i.test(p)){
+      p = '/csce242/project' + p;
+    }
+
+    const final = 'https://mehulb234.github.io' + p;
+    // debug log so you can copy/paste the final URL if something 404s
+    console.debug('[resolveImageUrl] original:', imgName, '->', final);
+    return final;
   }
 
+  // -----------------------
+  // fetch JSON and render catalog
+  // -----------------------
+  fetch(jsonUrl)
+    .then(r => {
+      if(!r.ok) throw new Error('fetch failed: ' + r.status);
+      return r.json();
+    })
+    .then(data => renderCatalog(data))
+    .catch(err => {
+      console.error('Failed to load catalog.json:', err);
+      const grid = document.querySelector('.catalog-grid');
+      if(grid) grid.innerHTML = '<p style="color:#f55;padding:16px;">Failed to load catalog.json</p>';
+    });
+
+  function renderCatalog(data){
+    if(!data || !Array.isArray(data.catalog)){
+      console.error('Invalid catalog format');
+      return;
+    }
+
+    const grid = document.querySelector('.catalog-grid');
+    if(!grid) {
+      console.error('No .catalog-grid element found');
+      return;
+    }
+
+    // Clear (remove any static/hard-coded cards)
+    grid.innerHTML = '';
+
+    data.catalog.forEach(item => {
+      const card = document.createElement('article');
+      card.className = 'catalog-card';
+
+      const imageUrl = resolveImageUrl(item.img_name || '');
+      // Build thumb (video vs link)
+      let thumbHtml;
+      if((item.media_type && item.media_type.toLowerCase() === 'video') || item.trailer_id){
+        thumbHtml = `
+          <button class="thumb" data-video="${item.trailer_id || ''}" aria-label="Play ${escapeHtml(item.title)} trailer">
+            <div class="card-thumb">
+              <img src="${imageUrl}" alt="${escapeHtml(item.img_alt || item.title || '')}">
+            </div>
+          </button>
+        `;
+      } else {
+        thumbHtml = `
+          <a href="${escapeHtml(item.detail_link || '#')}" class="thumb-link" aria-label="Open ${escapeHtml(item.title)} detail">
+            <div class="card-thumb">
+              <img src="${imageUrl}" alt="${escapeHtml(item.img_alt || item.title || '')}">
+            </div>
+          </a>
+        `;
+      }
+
+      const priceDisplay = item.price_display || (item.price ? "$" + Number(item.price).toFixed(2) : '');
+
+      card.innerHTML = `
+        ${thumbHtml}
+        <div class="card-body">
+          <div class="card-title"><a class="game-link" href="${escapeHtml(item.detail_link || '#')}">${escapeHtml(item.title || 'Untitled')}</a></div>
+          <div class="card-meta">${escapeHtml(item.platform || '')}</div>
+          <div class="card-bottom">
+            <div class="price">${escapeHtml(priceDisplay)}</div>
+            <a class="add-btn" href="#">Add to Cart</a>
+          </div>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    // After items inserted, wire up buttons and thumbs
+    setupAddButtonsAndThumbs();
+  }
+
+  // Simple, safe HTML escaper for inserted strings
+  function escapeHtml(s){
+    return String(s || '').replace(/[&<>"']/g, function(m){
+      return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[m];
+    });
+  }
+
+  // -----------------------
+  // add buttons + lightbox
+  // -----------------------
   function setupAddButtonsAndThumbs(){
+    // Add buttons
     const addBtns = Array.from(document.querySelectorAll('.add-btn'));
     addBtns.forEach(function(b){
-      const newB = b.cloneNode(true);
-      b.parentNode.replaceChild(newB, b);
-      newB.addEventListener('click',function(e){
+      b.addEventListener('click', function(e){
         e.preventDefault();
-        newB.blur();
-        var prev=newB.textContent;
-        newB.textContent='Added ✓';
-        setTimeout(function(){ newB.textContent=prev },900);
+        b.blur();
+        const prev = b.textContent;
+        b.textContent = 'Added ✓';
+        setTimeout(function(){ b.textContent = prev; }, 900);
       });
     });
 
+    // Lightbox for video thumbs
     const thumbs = Array.from(document.querySelectorAll('.thumb'));
-    if (!thumbs.length) return;
+    if(!thumbs.length) return;
 
     const lb = document.getElementById('lightbox');
     const overlay = document.getElementById('lb-overlay');
@@ -171,14 +291,10 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     thumbs.forEach(function(btn){
-      const clone = btn.cloneNode(true);
-      btn.parentNode.replaceChild(clone, btn);
-      clone.addEventListener('click', function(e){
+      btn.addEventListener('click', function(e){
         e.preventDefault();
-        const videoId = clone.dataset.video || clone.getAttribute('data-video');
-        if(videoId){
-          openVideo(videoId);
-        }
+        const videoId = btn.dataset.video || btn.getAttribute('data-video');
+        if(videoId) openVideo(videoId);
       });
     });
 
@@ -192,76 +308,4 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 
-  function renderCatalog(data){
-    if(!data || !Array.isArray(data.catalog)) {
-      showCatalogError("JSON structure invalid (expected data.catalog array).");
-      return;
-    }
-    const catalogGrid = document.querySelector('.catalog-grid');
-    if(!catalogGrid) {
-      console.warn("No .catalog-grid element found.");
-      return;
-    }
-
-    catalogGrid.innerHTML = '';
-
-    data.catalog.forEach(function(item){
-      const card = document.createElement('article');
-      card.className = 'catalog-card';
-
-      const imageUrl = absoluteImageUrl(item.img_name || item.image || '');
-
-      let thumbHtml = '';
-      if((item.media_type && item.media_type.toLowerCase() === 'video') || item.trailer_id){
-        const videoId = item.trailer_id || item.video || '';
-        thumbHtml = `
-          <button class="thumb" data-type="video" data-video="${videoId}" aria-label="Play ${item.title} trailer">
-            <div class="card-thumb">
-              <img src="${imageUrl}" alt="${(item.img_alt || item.title || '')}">
-            </div>
-          </button>
-        `;
-      } else {
-        thumbHtml = `
-          <a href="${item.detail_link || '#'}" class="thumb-link" aria-label="Open ${item.title} detail">
-            <div class="card-thumb">
-              <img src="${imageUrl}" alt="${(item.img_alt || item.title || '')}">
-            </div>
-          </a>
-        `;
-      }
-
-      const priceDisplay = item.price_display || (item.price ? ("$" + Number(item.price).toFixed(2)) : '');
-
-      card.innerHTML = `
-        ${thumbHtml}
-        <div class="card-body">
-          <div class="card-title"><a class="game-link" href="${item.detail_link || '#'}">${item.title || 'Untitled'}</a></div>
-          <div class="card-meta">${item.platform || ''}</div>
-          <div class="card-bottom">
-            <div class="price">${priceDisplay}</div>
-            <a class="add-btn" href="#">Add to Cart</a>
-          </div>
-        </div>
-      `;
-
-      catalogGrid.appendChild(card);
-    });
-
-    setupAddButtonsAndThumbs();
-  }
-
-  fetch(jsonUrl)
-    .then(response => {
-      if(!response.ok) throw new Error('Network response was ' + response.status);
-      return response.json();
-    })
-    .then(data => {
-      renderCatalog(data);
-    })
-    .catch(err => {
-      showCatalogError(err.message || 'Unknown error fetching JSON.');
-    });
-
-
-});
+}); // DOMContentLoaded end
