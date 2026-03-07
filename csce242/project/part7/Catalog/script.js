@@ -105,83 +105,163 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 
-  var addBtns=document.querySelectorAll('.add-btn');
-  addBtns.forEach(function(b){
-    b.addEventListener('click',function(e){
-      e.preventDefault();
-      b.blur();
-      var prev=b.textContent;
-      b.textContent='Added ✓';
-      setTimeout(function(){ b.textContent=prev },900);
+  const jsonUrl = "https://mehulB234.github.io/csce242/json/catalog.json";
+
+  function absoluteImageUrl(imgName){
+    if(!imgName) return '';
+    if(imgName.startsWith('http://') || imgName.startsWith('https://')) return imgName;
+    return `https://mehulB234.github.io/${imgName.replace(/^\/+/, '')}`;
+  }
+
+  function showCatalogError(msg){
+    console.error(msg);
+    const catalogGrid = document.querySelector('.catalog-grid');
+    if(catalogGrid){
+      catalogGrid.innerHTML = `<p class="error" style="color:#f33; padding:16px;">Could not load catalog: ${msg}</p>`;
+    }
+  }
+
+  function setupAddButtonsAndThumbs(){
+    const addBtns = Array.from(document.querySelectorAll('.add-btn'));
+    addBtns.forEach(function(b){
+      const newB = b.cloneNode(true);
+      b.parentNode.replaceChild(newB, b);
+      newB.addEventListener('click',function(e){
+        e.preventDefault();
+        newB.blur();
+        var prev=newB.textContent;
+        newB.textContent='Added ✓';
+        setTimeout(function(){ newB.textContent=prev },900);
+      });
     });
-  });
 
-const thumbs = Array.from(document.querySelectorAll('.thumb'));
+    const thumbs = Array.from(document.querySelectorAll('.thumb'));
+    if (!thumbs.length) return;
 
-if (thumbs.length) {
+    const lb = document.getElementById('lightbox');
+    const overlay = document.getElementById('lb-overlay');
+    const content = lb.querySelector('.lb-content');
+    const closeBtn = lb.querySelector('.lb-close');
 
-  const lb = document.getElementById('lightbox');
-  const overlay = document.getElementById('lb-overlay');
-  const content = lb.querySelector('.lb-content');
-  const closeBtn = lb.querySelector('.lb-close');
+    function openVideo(videoId){
+      content.innerHTML = '';
+      const iframe = document.createElement('iframe');
+      iframe.style.width = "min(960px,92vw)";
+      iframe.style.height = "min(540px,64vh)";
+      iframe.style.border = "0";
+      iframe.setAttribute("allowfullscreen", "");
+      iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
+      iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&mute=1&playsinline=1&rel=0";
+      content.appendChild(iframe);
 
-  function openVideo(videoId){
+      lb.setAttribute('aria-hidden','false');
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden','false');
+      document.documentElement.style.overflow='hidden';
+      document.body.style.overflow='hidden';
+    }
 
-    content.innerHTML = '';
+    function closeLightbox(){
+      lb.setAttribute('aria-hidden','true');
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden','true');
+      content.innerHTML = '';
+      document.documentElement.style.overflow='';
+      document.body.style.overflow='';
+    }
 
-    const iframe = document.createElement('iframe');
+    thumbs.forEach(function(btn){
+      const clone = btn.cloneNode(true);
+      btn.parentNode.replaceChild(clone, btn);
+      clone.addEventListener('click', function(e){
+        e.preventDefault();
+        const videoId = clone.dataset.video || clone.getAttribute('data-video');
+        if(videoId){
+          openVideo(videoId);
+        }
+      });
+    });
 
-    iframe.style.width = "min(960px,92vw)";
-    iframe.style.height = "min(540px,64vh)";
-    iframe.style.border = "0";
+    closeBtn.addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', closeLightbox);
 
-    iframe.setAttribute("allowfullscreen", "");
-    iframe.setAttribute(
-      "allow",
-      "autoplay; encrypted-media; picture-in-picture"
-    );
-
-    iframe.src =
-      "https://www.youtube.com/embed/" +
-      videoId +
-      "?autoplay=1&mute=1&playsinline=1&rel=0";
-
-    content.appendChild(iframe);
-
-    lb.setAttribute('aria-hidden','false');
-    overlay.classList.add('open');
-    overlay.setAttribute('aria-hidden','false');
-
-    document.documentElement.style.overflow='hidden';
-    document.body.style.overflow='hidden';
-  }
-
-  function closeLightbox(){
-    lb.setAttribute('aria-hidden','true');
-    overlay.classList.remove('open');
-    overlay.setAttribute('aria-hidden','true');
-    content.innerHTML = '';
-    document.documentElement.style.overflow='';
-    document.body.style.overflow='';
-  }
-
-  thumbs.forEach(function(btn){
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      const videoId = btn.dataset.video;
-      if(videoId){
-        openVideo(videoId);
+    document.addEventListener('keydown', function(e){
+      if(lb.getAttribute('aria-hidden') === 'false' && e.key === 'Escape'){
+        closeLightbox();
       }
     });
-  });
+  }
 
-  closeBtn.addEventListener('click', closeLightbox);
-  overlay.addEventListener('click', closeLightbox);
-
-  document.addEventListener('keydown', function(e){
-    if(lb.getAttribute('aria-hidden') === 'false' && e.key === 'Escape'){
-      closeLightbox();
+  function renderCatalog(data){
+    if(!data || !Array.isArray(data.catalog)) {
+      showCatalogError("JSON structure invalid (expected data.catalog array).");
+      return;
     }
-  });
+    const catalogGrid = document.querySelector('.catalog-grid');
+    if(!catalogGrid) {
+      console.warn("No .catalog-grid element found.");
+      return;
+    }
 
-}} );
+    catalogGrid.innerHTML = '';
+
+    data.catalog.forEach(function(item){
+      const card = document.createElement('article');
+      card.className = 'catalog-card';
+
+      const imageUrl = absoluteImageUrl(item.img_name || item.image || '');
+
+      let thumbHtml = '';
+      if((item.media_type && item.media_type.toLowerCase() === 'video') || item.trailer_id){
+        const videoId = item.trailer_id || item.video || '';
+        thumbHtml = `
+          <button class="thumb" data-type="video" data-video="${videoId}" aria-label="Play ${item.title} trailer">
+            <div class="card-thumb">
+              <img src="${imageUrl}" alt="${(item.img_alt || item.title || '')}">
+            </div>
+          </button>
+        `;
+      } else {
+        thumbHtml = `
+          <a href="${item.detail_link || '#'}" class="thumb-link" aria-label="Open ${item.title} detail">
+            <div class="card-thumb">
+              <img src="${imageUrl}" alt="${(item.img_alt || item.title || '')}">
+            </div>
+          </a>
+        `;
+      }
+
+      const priceDisplay = item.price_display || (item.price ? ("$" + Number(item.price).toFixed(2)) : '');
+
+      card.innerHTML = `
+        ${thumbHtml}
+        <div class="card-body">
+          <div class="card-title"><a class="game-link" href="${item.detail_link || '#'}">${item.title || 'Untitled'}</a></div>
+          <div class="card-meta">${item.platform || ''}</div>
+          <div class="card-bottom">
+            <div class="price">${priceDisplay}</div>
+            <a class="add-btn" href="#">Add to Cart</a>
+          </div>
+        </div>
+      `;
+
+      catalogGrid.appendChild(card);
+    });
+
+    setupAddButtonsAndThumbs();
+  }
+
+  fetch(jsonUrl)
+    .then(response => {
+      if(!response.ok) throw new Error('Network response was ' + response.status);
+      return response.json();
+    })
+    .then(data => {
+      renderCatalog(data);
+    })
+    .catch(err => {
+      showCatalogError(err.message || 'Unknown error fetching JSON.');
+    });
+
+
+});
