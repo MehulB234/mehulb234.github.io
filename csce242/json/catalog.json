@@ -9,7 +9,7 @@
       "genre": "RPG",
       "price": 59.99,
       "price_display": "$59.99",
-      "detail_link": "../Elden Ring/index.html"
+      "detail_link": "../EldenRing/index.html"
     },
     {
       "_id": 2,
@@ -49,7 +49,7 @@
     {
       "_id": 5,
       "title": "Assassin's Creed",
-      "img_name": "Images/Assassin.png",
+      "img_name": "../../homepage/images/Assassin.png",
       "img_alt": "Assassin's Creed cover",
       "platform": "Xbox",
       "genre": "Action / Adventure",
@@ -60,7 +60,7 @@
     {
       "_id": 6,
       "title": "Minecraft",
-      "img_name": "Images/Minecraft.png",
+      "img_name": "../../homepage/images/Minecraft.png",
       "img_alt": "Minecraft cover",
       "platform": "PC",
       "genre": "Sandbox",
@@ -71,7 +71,7 @@
     {
       "_id": 7,
       "title": "God of War",
-      "img_name": "Images/GodOfWar.png",
+      "img_name": "../../homepage/images/GodOfWar.png",
       "img_alt": "God of War cover",
       "platform": "PlayStation",
       "genre": "Action",
@@ -82,7 +82,7 @@
     {
       "_id": 8,
       "title": "Halo Infinite",
-      "img_name": "Images/Halo.png",
+      "img_name": "../../homepage/images/Halo.png",
       "img_alt": "Halo Infinite cover",
       "platform": "Xbox",
       "genre": "Shooter",
