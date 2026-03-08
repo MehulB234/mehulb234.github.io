@@ -170,7 +170,9 @@ document.addEventListener('DOMContentLoaded', function () {
           const btn = document.createElement('button');
           btn.className = 'thumb';
           btn.setAttribute('data-video', item.trailer_id || '');
-          btn.setAttribute('aria-label','Play '+ (item.title || 'video') +' trailer');
+          btn.setAttribute('data-title', item.title || '');
+          btn.setAttribute('data-desc', item.description || '');
+          btn.setAttribute('aria-label','Show details for '+ (item.title || 'game'));
           thumbWrap = btn;
         } else {
           const a = document.createElement('a');
@@ -288,22 +290,58 @@ document.addEventListener('DOMContentLoaded', function () {
     const content = lb ? lb.querySelector('.lb-content') : null;
     const closeBtn = lb ? lb.querySelector('.lb-close') : null;
 
-    function openVideo(videoId){
+    function openLightbox(opts){
       if(!content || !lb) return;
       content.innerHTML = '';
-      const iframe = document.createElement('iframe');
-      iframe.style.width = "min(960px,92vw)";
-      iframe.style.height = "min(540px,64vh)";
-      iframe.style.border = "0";
-      iframe.setAttribute("allowfullscreen", "");
-      iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
-      iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&mute=1&playsinline=1&rel=0";
-      content.appendChild(iframe);
+      const metaWrap = document.createElement('div');
+      metaWrap.className = 'lb-meta';
+      const h = document.createElement('h2');
+      h.className = 'lb-title';
+      h.textContent = opts.title || '';
+      const p = document.createElement('p');
+      p.className = 'lb-desc';
+      p.textContent = opts.desc || '';
+      metaWrap.appendChild(h);
+      metaWrap.appendChild(p);
+      content.appendChild(metaWrap);
+
+      if(opts.img){
+        const imgWrap = document.createElement('div');
+        imgWrap.className = 'lb-thumb';
+        const imgEl = document.createElement('img');
+        imgEl.src = opts.img;
+        imgEl.alt = opts.title || 'thumbnail';
+        imgWrap.appendChild(imgEl);
+        content.insertBefore(imgWrap, metaWrap);
+      }
+
+      if(opts.videoId){
+        const btn = document.createElement('button');
+        btn.className = 'play-btn';
+        btn.textContent = 'Play Trailer';
+        btn.addEventListener('click', function(){
+          content.innerHTML = '';
+          const iframe = document.createElement('iframe');
+          iframe.style.width = "min(960px,92vw)";
+          iframe.style.height = "min(540px,64vh)";
+          iframe.style.border = "0";
+          iframe.setAttribute("allowfullscreen", "");
+          iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
+          iframe.src = "https://www.youtube.com/embed/" + opts.videoId + "?autoplay=1&mute=0&rel=0";
+          content.appendChild(iframe);
+        });
+        content.appendChild(btn);
+      }
+
       lb.setAttribute('aria-hidden','false');
       if(overlay) overlay.classList.add('open');
       if(overlay) overlay.setAttribute('aria-hidden','false');
       document.documentElement.style.overflow='hidden';
       document.body.style.overflow='hidden';
+      setTimeout(function(){
+        const focusEl = content.querySelector('.play-btn') || content.querySelector('button, a');
+        if(focusEl) focusEl.focus();
+      },60);
     }
 
     function closeLightbox(){
@@ -322,7 +360,11 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.addEventListener('click', function(e){
           e.preventDefault();
           const videoId = btn.dataset.video || btn.getAttribute('data-video');
-          if(videoId) openVideo(videoId);
+          const title = btn.dataset.title || '';
+          const desc = btn.dataset.desc || '';
+          const imgEl = btn.querySelector('img');
+          const imgSrc = imgEl ? imgEl.src : '';
+          openLightbox({ videoId: videoId || null, title: title, desc: desc, img: imgSrc });
         });
         btn._thumbBound = true;
       }

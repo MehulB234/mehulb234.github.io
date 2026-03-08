@@ -457,3 +457,20 @@ a:focus {
 .lb-prev,.lb-next{display:none}
 .lb-content iframe{height:50vh}
 }
+
+.lb-content{display:flex;flex-direction:row;gap:18px;align-items:center;justify-content:center;padding:18px}
+.lb-meta{max-width:56%;color:var(--white);text-align:left}
+.lb-title{font-size:22px;margin:0 0 8px;font-weight:800}
+.lb-desc{color:var(--muted);line-height:1.6;margin:0 0 18px}
+.play-btn{background:var(--accent);border:0;color:#001307;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:800}
+.lb-thumb{max-width:42%;flex-shrink:0}
+.lb-thumb img{width:100%;height:auto;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.6)}
+@media (max-width:900px){
+  .lb-content{flex-direction:column;padding:12px}
+  .lb-content img{max-width:100%;max-height:36vh}
+  .lb-meta{max-width:100%}
+}
+@media (max-width:600px){
+  .lb-prev,.lb-next{display:none}
+  .lb-content iframe{height:50vh}
+}
