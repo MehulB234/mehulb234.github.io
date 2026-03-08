@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){
       toggleBtn.classList.toggle('open', isOpen);
       mobileNav.classList.toggle('open', isOpen);
       overlay.classList.toggle('open', isOpen);
+      document.documentElement.classList.toggle('nav-open', isOpen);
       if (isOpen) {
         mobileNav.hidden = false;
         overlay.hidden = false;

@@ -164,3 +164,21 @@ button:focus,a:focus{outline:3px solid rgba(21,210,90,0.16);outline-offset:2px}
 .navlinks.open{display:flex;position:absolute;top:64px;right:16px;background:var(--nav);flex-direction:column;padding:12px;gap:8px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.6)}
 @media (max-width:900px){.wrap{padding:28px 20px}.empty-panel{padding:36px}.page-title{font-size:32px}}
 @media (max-width:600px){nav{grid-template-columns:1fr auto;padding:12px 16px}.navlinks{display:none}.nav-toggle{display:block}.page-title{font-size:26px}.empty-panel{padding:24px}.wish-thumb{width:88px;height:64px}}
+@media (max-width:900px){
+  .wrap { transition: transform .28s cubic-bezier(.2,.9,.2,1); }
+}
+@media (max-width:600px){
+  .nav-open .wrap {
+    transform: translateX(-86%);
+  }
+  .nav-open header {
+    position: sticky;
+    top: 0;
+    z-index: 1301;
+  }
+  .mobile-nav {
+    width: 86%;
+    max-width: 320px;
+    right: 0;
+  }
+}

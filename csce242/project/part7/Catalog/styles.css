@@ -32,6 +32,7 @@ body {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 36px 20px;
+  transition: transform .28s cubic-bezier(.2,.9,.2,1);
 }
 header {
   position: sticky;
@@ -499,4 +500,18 @@ a:focus {
 
 .play-btn{
   margin-top: 12px;
+}
+
+@media (max-width:900px){
+  .wrap { transition: transform .28s cubic-bezier(.2,.9,.2,1); }
+}
+@media (max-width:600px){
+  .nav-open .wrap {
+    transform: translateX(-86%);
+  }
+  .nav-open header {
+    position: sticky;
+    top: 0;
+    z-index: 1301;
+  }
 }

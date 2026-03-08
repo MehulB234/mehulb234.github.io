@@ -166,3 +166,21 @@ button:focus,a:focus{outline:3px solid rgba(21,210,90,0.16);outline-offset:2px}
     display:none;
   }
 }
+@media (max-width:900px){
+  .wrap { transition: transform .28s cubic-bezier(.2,.9,.2,1); }
+}
+@media (max-width:600px){
+  .nav-open .wrap {
+    transform: translateX(-86%);
+  }
+  .nav-open header {
+    position: sticky;
+    top: 0;
+    z-index: 1301;
+  }
+  .mobile-nav {
+    width: 86%;
+    max-width: 320px;
+    right: 0;
+  }
+}

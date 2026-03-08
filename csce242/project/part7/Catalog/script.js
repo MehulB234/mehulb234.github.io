@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
       toggleBtn.classList.toggle('open', isOpen);
       mobileNav.classList.toggle('open', isOpen);
       overlay.classList.toggle('open', isOpen);
+      document.documentElement.classList.toggle('nav-open', isOpen);
 
       if(isOpen){
         mobileNav.hidden = false;
@@ -32,6 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     overlay.addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){
+        const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+        if(expanded) setOpen(false);
+      }
+    });
   })();
 
   var slides=[
