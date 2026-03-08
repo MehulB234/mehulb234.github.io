@@ -297,10 +297,17 @@ document.addEventListener('DOMContentLoaded', function () {
       metaWrap.className = 'lb-meta';
       const h = document.createElement('h2');
       h.className = 'lb-title';
-      h.textContent = opts.title || '';
       const p = document.createElement('p');
       p.className = 'lb-desc';
-      p.textContent = opts.desc || '';
+
+      if (opts.desc && opts.desc.trim().length > 0) {
+        h.textContent = opts.desc;
+        p.textContent = opts.title || '';
+      } else {
+        h.textContent = opts.title || '';
+        p.textContent = opts.desc || '';
+      }
+
       metaWrap.appendChild(h);
       metaWrap.appendChild(p);
       content.appendChild(metaWrap);
