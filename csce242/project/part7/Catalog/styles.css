@@ -474,3 +474,29 @@ a:focus {
   .lb-prev,.lb-next{display:none}
   .lb-content iframe{height:50vh}
 }
+
+.lb-meta{
+  max-width: 460px;
+  color: var(--white);
+  text-align: left;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 20px 22px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+}
+
+.lb-title{
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.lb-subtitle{
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.play-btn{
+  margin-top: 12px;
+}
