@@ -17,10 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
           overlay.hidden = false;
           toggleBtn.setAttribute('aria-expanded', 'true');
           toggleBtn.setAttribute('aria-label', 'Close menu');
-
           document.documentElement.style.overflow = 'hidden';
           document.body.style.overflow = 'hidden';
-
           const first = mobileNav.querySelector('[role="menuitem"], a, button, input');
           if (first) first.focus();
         } else {
@@ -28,10 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
           overlay.hidden = true;
           toggleBtn.setAttribute('aria-expanded', 'false');
           toggleBtn.setAttribute('aria-label', 'Open menu');
-
           document.documentElement.style.overflow = '';
           document.body.style.overflow = '';
-
           toggleBtn.focus();
         }
       }
@@ -70,10 +66,9 @@ document.addEventListener('DOMContentLoaded', function () {
   var hero = document.getElementById('hero');
   var heroInner = document.getElementById('hero-inner');
   var dotsCont = document.getElementById('hero-dots');
-  var prevBtn = document.getElementById('hero-prev');
-  var nextBtn = document.getElementById('hero-next');
+  var sidePrev = document.getElementById('hero-side-prev');
+  var sideNext = document.getElementById('hero-side-next');
   var index = 0;
-
   function renderHero(i){
     if (!hero) return;
     hero.style.background = slides[i].bg;
@@ -84,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var dots = dotsCont.querySelectorAll('.dot');
     dots.forEach(function(d,ii){ d.classList.toggle('active', ii === i); });
   }
-
   if (dotsCont) {
     slides.forEach(function(_, i) {
       var d = document.createElement('button');
@@ -94,11 +88,13 @@ document.addEventListener('DOMContentLoaded', function () {
       dotsCont.appendChild(d);
     });
     renderHero(index);
-    if (prevBtn) prevBtn.addEventListener('click', function(){ index = (index - 1 + slides.length) % slides.length; renderHero(index); });
-    if (nextBtn) nextBtn.addEventListener('click', function(){ index = (index + 1) % slides.length; renderHero(index); });
-    var auto = setInterval(function(){ index = (index + 1) % slides.length; renderHero(index); }, 6000);
-    hero.addEventListener('mouseenter', function(){ clearInterval(auto); });
-    hero.addEventListener('mouseleave', function(){ auto = setInterval(function(){ index = (index + 1) % slides.length; renderHero(index); }, 6000); });
+    if (sidePrev) sidePrev.addEventListener('click', function(){ index = (index - 1 + slides.length) % slides.length; renderHero(index); });
+    if (sideNext) sideNext.addEventListener('click', function(){ index = (index + 1) % slides.length; renderHero(index); });
+    var auto = setInterval(function(){ index = (index + 1) % slides.length; renderHero(index); },6000);
+    if(hero){
+      hero.addEventListener('mouseenter',function(){ clearInterval(auto); });
+      hero.addEventListener('mouseleave',function(){ auto=setInterval(function(){ index=(index+1)%slides.length; renderHero(index); },6000); });
+    }
   }
 
   (function () {
