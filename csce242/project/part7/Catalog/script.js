@@ -136,6 +136,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const PLACEHOLDER = '/csce242/project/homepage/images/placeholder.png';
 
+  const descriptions = {
+    'fc 26': 'FC 26 is a high-energy soccer experience with realistic ball physics, dynamic stadium atmospheres, and deep team customization. Compete in leagues, build your squad, and perform clutch plays in fast-paced matches.',
+    'fc26': 'FC 26 is a high-energy soccer experience with realistic ball physics, dynamic stadium atmospheres, and deep team customization. Compete in leagues, build your squad, and perform clutch plays in fast-paced matches.',
+    'fc-26': 'FC 26 is a high-energy soccer experience with realistic ball physics, dynamic stadium atmospheres, and deep team customization. Compete in leagues, build your squad, and perform clutch plays in fast-paced matches.'
+  };
+
   function showCatalogError(msg){
     const grid = document.querySelector('.catalog-grid');
     if(grid){
@@ -171,7 +177,9 @@ document.addEventListener('DOMContentLoaded', function () {
           btn.className = 'thumb';
           btn.setAttribute('data-video', item.trailer_id || '');
           btn.setAttribute('data-title', item.title || '');
-          btn.setAttribute('data-desc', item.description || '');
+          const key = (item.title || '').toLowerCase().trim();
+          const hard = descriptions[key] || '';
+          btn.setAttribute('data-desc', hard);
           btn.setAttribute('aria-label','Show details for '+ (item.title || 'game'));
           thumbWrap = btn;
         } else {
@@ -293,23 +301,24 @@ document.addEventListener('DOMContentLoaded', function () {
     function openLightbox(opts){
       if(!content || !lb) return;
       content.innerHTML = '';
+
       const metaWrap = document.createElement('div');
       metaWrap.className = 'lb-meta';
+
+      const descExists = opts.desc && opts.desc.trim().length > 0;
+
       const h = document.createElement('h2');
       h.className = 'lb-title';
-      const p = document.createElement('p');
-      p.className = 'lb-desc';
+      const sub = document.createElement('div');
+      sub.className = 'lb-subtitle';
+      sub.style.opacity = '0.9';
+      sub.style.marginBottom = '8px';
 
-      if (opts.desc && opts.desc.trim().length > 0) {
-        h.textContent = opts.desc;
-        p.textContent = opts.title || '';
-      } else {
-        h.textContent = opts.title || '';
-        p.textContent = opts.desc || '';
-      }
+      h.textContent = descExists ? opts.desc : opts.title || '';
+      sub.textContent = (opts.title && descExists) ? opts.title : (descExists ? '' : (opts.desc || ''));
 
       metaWrap.appendChild(h);
-      metaWrap.appendChild(p);
+      metaWrap.appendChild(sub);
       content.appendChild(metaWrap);
 
       if(opts.img){
@@ -368,10 +377,11 @@ document.addEventListener('DOMContentLoaded', function () {
           e.preventDefault();
           const videoId = btn.dataset.video || btn.getAttribute('data-video');
           const title = btn.dataset.title || '';
-          const desc = btn.dataset.desc || '';
+          const descFromData = btn.dataset.desc || '';
           const imgEl = btn.querySelector('img');
           const imgSrc = imgEl ? imgEl.src : '';
-          openLightbox({ videoId: videoId || null, title: title, desc: desc, img: imgSrc });
+          const finalDesc = descFromData || '';
+          openLightbox({ videoId: videoId || null, title: title, desc: finalDesc, img: imgSrc });
         });
         btn._thumbBound = true;
       }
