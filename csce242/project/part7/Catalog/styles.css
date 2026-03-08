@@ -81,6 +81,10 @@ nav {
 .navlinks a.active {
   color: var(--white);
 }
+.navlinks .sep {
+  color: var(--muted);
+  padding: 0 6px;
+}
 .icons {
   display: flex;
   gap: 12px;

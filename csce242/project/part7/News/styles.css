@@ -37,6 +37,7 @@ nav{
 .navlinks{display:flex;gap:22px;align-items:center;justify-self:center}
 .navlinks a{color:var(--muted);text-decoration:none;font-weight:600}
 .navlinks a.active{color:var(--white)}
+.navlinks .sep{color:var(--muted);padding:0 6px}
 .icons{display:flex;gap:12px;align-items:center;justify-self:end}
 .icon{width:36px;height:36px;border-radius:8px;background:var(--glass);display:grid;place-items:center;color:var(--muted);text-decoration:none}
 .icon:hover{color:var(--white)}

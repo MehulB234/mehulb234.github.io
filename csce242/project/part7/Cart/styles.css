@@ -17,9 +17,11 @@ nav{background:var(--nav);display:grid;grid-template-columns:1fr auto 1fr;align-
 .brand{display:flex;align-items:center;gap:12px;justify-self:start}
 .logo{font-weight:800;font-size:18px}
 .logo .green{color:var(--accent)}
-.navlinks{display:flex;gap:22px;align-items:center;justify-self:center}
-.navlinks a{color:var(--muted);text-decoration:none;font-weight:600}
+.navlinks{display:flex;gap:22px;align-items:center;justify-self:center;color:var(--muted);font-weight:600}
+.navlinks a{color:var(--muted);text-decoration:none;font-weight:600;padding:6px 8px}
 .navlinks a.active{color:var(--accent)}
+.navlinks .sep{color:var(--muted);padding:0 6px}
+
 .icons{display:flex;gap:12px;align-items:center;justify-self:end}
 .icon{width:36px;height:36px;border-radius:8px;background:var(--glass);display:grid;place-items:center;color:var(--muted);text-decoration:none}
 .icon:hover{color:var(--white)}

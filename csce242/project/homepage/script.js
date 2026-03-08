@@ -37,8 +37,12 @@ function showSlide(index){
   current = index;
 }
 
-document.getElementById('hero-prev').addEventListener('click', () => showSlide((current - 1 + slides.length) % slides.length));
-document.getElementById('hero-next').addEventListener('click', () => showSlide((current + 1) % slides.length));
+const sidePrev = document.getElementById('hero-side-prev');
+const sideNext = document.getElementById('hero-side-next');
+if (sidePrev && sideNext) {
+  sidePrev.addEventListener('click', () => showSlide((current - 1 + slides.length) % slides.length));
+  sideNext.addEventListener('click', () => showSlide((current + 1) % slides.length));
+}
 
 const row = document.getElementById('featured-row');
 const left = document.getElementById('feat-left');
