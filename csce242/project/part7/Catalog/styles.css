@@ -440,7 +440,6 @@ a:focus {
   opacity: 0;
   transform: translateX(-6px);
 }
-
 .lightbox{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:1400;pointer-events:none;opacity:0;transition:opacity .22s ease}
 .lightbox[aria-hidden="false"]{pointer-events:auto;opacity:1}
 .lb-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1300;opacity:0;transition:opacity .22s ease;pointer-events:none}
@@ -515,3 +514,5 @@ a:focus {
     z-index: 1301;
   }
 }
+
+.site-footer{padding:36px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02);margin-top:36px}
