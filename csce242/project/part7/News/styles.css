@@ -244,3 +244,44 @@ button:focus,a:focus{outline:3px solid rgba(21,210,90,0.18);outline-offset:2px}
     right: 0;
   }
 }
+
+@media (max-width:900px){
+  .nav-toggle{
+    display:inline-flex !important;
+    align-items:center;
+    justify-content:center;
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    padding:0 !important;
+    z-index:2000 !important;
+    position:relative !important;
+  }
+
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after{
+    background-color:var(--white) !important;
+  }
+
+  .mobile-nav{
+    z-index:3000 !important;
+  }
+
+  .nav-overlay{
+    z-index:2500 !important;
+  }
+
+  .topbar{
+    z-index:1000;
+  }
+
+  .icons{
+    display:none;
+  }
+
+  .nav-open .wrap{
+    transform:translateX(-80%);
+  }
+}
